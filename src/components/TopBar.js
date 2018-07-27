@@ -6,6 +6,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 
 const styles = {
   root: {
@@ -16,8 +19,8 @@ const styles = {
   },
   bar: {
     flex: 1,
-    
-  }
+  },
+
 };
 
 function TopBar(props) {
