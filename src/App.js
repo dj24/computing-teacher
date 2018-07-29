@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import TopBar from './components/TopBar'
 import CenteredGrid from './components/CenteredGrid'
 
+
 import logo from './img/logo.png';
 import './App.css';
 
@@ -13,9 +14,10 @@ const styles={
   }
 }
 
+
+
+
 const App = () => (
-
-
   <div>
 
     <TopBar logo={logo}/>
@@ -24,7 +26,7 @@ const App = () => (
       <Button variant="contained" color="secondary">
         Hello World
       </Button>
-
+    
 
    </div>
  );

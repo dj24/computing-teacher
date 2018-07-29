@@ -13,6 +13,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import LogoutDialog from '../components/LogoutDialog'
 import MenuItem from '@material-ui/core/MenuItem';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+
+const drawerWidth = 240;
 
 const styles = {
   root: {
@@ -32,6 +42,11 @@ const styles = {
     flex: 1,
     alignSelf: 'center',
   },
+  drawerPaper: {
+    position: 'relative',
+    width: drawerWidth,
+  },
+
 };
 
 class TopBar extends React.Component {
@@ -58,10 +73,56 @@ class TopBar extends React.Component {
   }
 
 
+
   render() {
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    const { anchor } = this.state;
+
+
+    let list1 = (
+      <div className={classes.root}>
+      <List component="nav">
+       <ListItem button>
+         <ListItemIcon>
+           <InboxIcon />
+         </ListItemIcon>
+         <ListItemText primary="Inbox" />
+       </ListItem>
+       <ListItem button>
+         <ListItemIcon>
+           <DraftsIcon />
+         </ListItemIcon>
+         <ListItemText primary="Drafts" />
+       </ListItem>
+     </List>
+     <Divider />
+     <List component="nav">
+       <ListItem button>
+         <ListItemText primary="Trash" />
+       </ListItem>
+       <ListItem button component="a" href="#simple-list">
+         <ListItemText primary="Spam" />
+       </ListItem>
+     </List>
+     </div>
+    )
+
+
+    const drawer = (
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          anchor={anchor}
+        >
+          <div className={classes.toolbar} />
+          <Divider />
+          {list1}
+        </Drawer>
+      );
 
     let logoutDialog =  (
       <LogoutDialog open={this.state.logoutConfirm}/>
@@ -72,6 +133,14 @@ class TopBar extends React.Component {
         {logoutDialog}
         <AppBar position="static">
           <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={this.handleDrawerToggle}
+              className={classes.navIconHide}
+            >
+              <MenuIcon />
+            </IconButton>
             <div class={classes.flex}>
               <img src={this.props.logo} class={classes.logo}/>
             </div>
@@ -107,6 +176,7 @@ class TopBar extends React.Component {
             )}
           </Toolbar>
         </AppBar>
+          {drawer}
       </div>
     );
   }
