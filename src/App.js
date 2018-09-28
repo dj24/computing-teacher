@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import AppBar from '@material-ui/core/AppBar';
-import TopBar from './components/TopBar'
-import CenteredGrid from './components/CenteredGrid'
-import StaticDrawer from './components/StaticDrawer'
-
-import logo from './img/logo.png';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 
-const styles={
-  container: {
-    backgroundColor: '#eeeeee',
-    flexDirection: 'row',
-  },
-  horizontal: {
-    flex:1
+import Home from './screens/Home'
+import Dashboard from './screens/Dashboard'
+import Navbar from './components/Navbar'
+import Drawer from './components/Drawer'
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div class="row">
+          <Drawer class='col'/>
+          <div class='col main'>
+            <Navbar/>
+            <Route exact path="/" component={Home} />
+            <Route path="/dashboard" component={Dashboard} />
+          </div>
+        </div>
+      </Router>
+    );
   }
 }
-
-
-
-
-const App = () => (
-  <div>
-      <TopBar logo={logo}>
-        <CenteredGrid/>
-      </TopBar>
-   </div>
- );
 
 export default App;
