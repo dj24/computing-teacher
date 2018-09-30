@@ -14,7 +14,10 @@ class DrawerItem extends Component {
     return (
       <li className={"list-group-item " + (this.props.link == current_path ? 'active' : '')}>
         <div></div>
-        <Link class="nav-link" to={this.props.link}>{this.props.label}</Link>
+        <Link class="nav-link" to={this.props.link}>
+          <i class="material-icons drawer-icon">{this.props.icon}</i>
+          {this.props.label}
+        </Link>
       </li>
 
     );

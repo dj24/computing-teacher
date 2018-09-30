@@ -10,6 +10,10 @@ class FadingScreen extends Component {
     setTimeout(function(){
       this.setState({active:true})
     }.bind(this), 50);
+
+    setTimeout(function(){
+      
+    }.bind(this), 500);
   }
 
   componentWillUnmount() {

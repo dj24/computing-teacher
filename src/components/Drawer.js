@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import DrawerItem from '../components/DrawerItem'
-
+import Logo from'../img/logo.png';
 
 class Drawer extends Component {
   render() {
     return (
       <div class='drawer'>
         <ul class="list-group">
-          <DrawerItem label="Home" link="/"/>
-          <DrawerItem label="Dashboard" link="/dashboard"/>
-          <DrawerItem label="Settings" link="/settings"/>
+          <img  src={Logo} className="logo" alt="logo"/>
+          <DrawerItem icon="home" label="Home" link="/"/>
+          <DrawerItem icon="dashboard" label="Dashboard" link="/dashboard"/>
         </ul>
       </div>
     );
