@@ -13,6 +13,9 @@ class Drawer extends Component {
           <img  src={Logo} className="logo" alt="logo"/>
           <DrawerItem icon="home" label="Home" link="/"/>
           <DrawerItem icon="dashboard" label="Dashboard" link="/dashboard"/>
+          <DrawerItem icon="library_books" label="Learn" link="/learn"/>
+          <DrawerItem icon="edit" label="Tests" link="/test"/>
+          <DrawerItem icon="help" label="Help" link="/help"/>
         </ul>
       </div>
     );

@@ -1,5 +1,6 @@
 $nav-height: 75px;
 $shadow: 0 4px 12px rgba(0,0,0,0.15);
+$drawerWidth: 250px;
 $anim: all cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
 /*colours */
 $primary: #7DE522;
@@ -30,8 +31,18 @@ a, a:hover{
 body{
   margin: 0;
   background: $bg;
-  overflow-x: hidden;
   font-family: $font;
+//  overflow-x: hidden;
+}
+.navbar-nav{
+  display: flex;
+  width:100%;
+  justify-content: space-between;
+}
+
+.row{
+  width:100%;
+  margin:auto;
 }
 
 .main{
@@ -39,24 +50,22 @@ body{
   height:auto;
   margin-left: 250px;
   position:relative;
-  > div{
-    width: calc(100% - #{$margin} * 4);
-    //width:100%;
-    margin-left: $margin;
-    box-sizing : border-box;
-    overflow-x: hidden;
-  }
-  .row{
-    margin:$margin;
-  }
-  .row:first-of-type{
-    margin-top:$margin*2;
-  }
+}
+
+.card-container{
+  padding:0;
+}
+
+.module{
+  padding:$margin;
+  background: none;
 }
 
 .card{
   box-shadow: $shadow;
   border:0;
+  border-radius: 0;
+  margin:$margin;
   padding:24px;
   background: white;
   .card-header{
@@ -87,7 +96,6 @@ body{
   overflow-x: hidden;
   z-index:1;
   height:100%;
-
   .list-group-item{
     height:60px;
     border-radius: 0;
@@ -99,7 +107,7 @@ body{
       height: 60px;
       width:0;
       bottom:0;
-      left:12px;
+      left:0;
       position: absolute;
       margin:0;
       transition: $anim;
@@ -129,7 +137,51 @@ body{
 
 }
 
+.menu-icon{
+  display: none;
+}
+
+@media only screen and (max-width: 960px) {
+  .menu-icon{
+    display: block;
+  }
+  body{
+    background:white;
+  }
+  .drawer{
+    transform: translateX(-255px);
+  }
+  .navbar{
+    position: fixed;
+    width:100%;
+  }
+
+  .main{
+    margin-left:0;
+  }
+  .card{
+    box-shadow: none;
+    margin:0;
+  }
+  .module{
+    margin-top: $nav-height;
+    padding:0;
+    margin:0;
+  }
+  .search-container{
+    float:right;
+  }
+  .notifications{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+}
+
 nav{
+  z-index: 2;
   height: $nav-height;
   background: white;
   colour:$light;
@@ -137,7 +189,7 @@ nav{
 }
 
 .nav-link{
-  transform: translateY(-8px);
+  padding: 0;
 }
 
 .nav-icon{

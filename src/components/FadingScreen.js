@@ -12,7 +12,7 @@ class FadingScreen extends Component {
     }.bind(this), 50);
 
     setTimeout(function(){
-      
+
     }.bind(this), 500);
   }
 

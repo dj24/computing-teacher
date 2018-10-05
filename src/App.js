@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Router>
         <div className="row">
-      
+
           <Drawer className='col'/>
           <div class='col main'>
             <Navbar/>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2';
-import Card from '../components/Card'
+import {SmallCard,MediumCard,LargeCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
 
 class Dashboard extends Component {
@@ -49,7 +49,7 @@ class Dashboard extends Component {
     return (
       <FadingScreen>
       <div class='row'>
-        <Card>
+        <LargeCard>
           <Bar
             data={data}
             height={300}
@@ -57,20 +57,20 @@ class Dashboard extends Component {
               maintainAspectRatio: false
             }}
           />
-        </Card>
+        </LargeCard>
       </div>
         <div class='row'>
-          <Card>
+          <MediumCard>
             Some quick example text to build on the card title and make up the bulk of the card's content.
-          </Card>
-          <Card>
-          </Card>
+          </MediumCard>
+          <MediumCard>
+          </MediumCard>
         </div>
 
         <div class='row'>
-          <Card/>
-          <Card/>
-          <Card/>
+          <SmallCard />
+          <SmallCard />
+          <SmallCard />
         </div>
       </FadingScreen>
     );
