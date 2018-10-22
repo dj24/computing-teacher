@@ -7,14 +7,15 @@ class Card extends Component {
     this.size='12';
   }
 
+
+
   render() {
 
     return (
       <div className={"card-container col-12 col-lg-" + (this.size == 4 ? this.size + " col-md-6" : this.size)}>
         <div className={"card"}>
-          <div class="card-header">Header</div>
+          <div class="card-header">{this.props.title}</div>
           <div class="card-body">
-            <h5 class="card-title">Light card title</h5>
             <p class="card-text">
               {this.props.children}
             </p>

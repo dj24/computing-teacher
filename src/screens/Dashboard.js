@@ -2,22 +2,35 @@ import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2';
 import {SmallCard,MediumCard,LargeCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
+import Heading from '../components/Heading'
+import axios from 'axios';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {active:false};
+    this.state = {
+      active:false,
+      tests:[],
+    };
   }
 
   componentDidMount(){
-    setTimeout(function(){
-      this.setState({active:true})
-    }.bind(this), 50);
+    axios.get(`http://localhost:5000/query?type=getTests`)
+      .then(res => {
+        const tests = res.data;
+        this.setState({ tests });
+        setTimeout(function(){
+          this.setState({active:true})
+        }.bind(this), 50);
+      })
+
   }
 
   componentWillUnmount() {
   this.setState({active:false})
   }
+
+
 
   render() {
 
@@ -46,10 +59,13 @@ class Dashboard extends Component {
             }]
         }
 
+
+
     return (
       <FadingScreen>
+      <Heading>Overview</Heading>
       <div class='row'>
-        <LargeCard>
+        <LargeCard title="Graph">
           <Bar
             data={data}
             height={300}
@@ -59,13 +75,18 @@ class Dashboard extends Component {
           />
         </LargeCard>
       </div>
+      <Heading>Tests</Heading>
         <div class='row'>
-          <MediumCard>
+          { this.state.tests.map(test => <MediumCard title={test.title}>Test</MediumCard>)}
+        </div>
+        <div class='row'>
+          <MediumCard title="Test Title">
             Some quick example text to build on the card title and make up the bulk of the card's content.
           </MediumCard>
           <MediumCard>
           </MediumCard>
         </div>
+
 
         <div class='row'>
           <SmallCard />

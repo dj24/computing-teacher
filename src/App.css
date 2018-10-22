@@ -22,6 +22,16 @@ body {
   width: 100%;
   justify-content: space-between; }
 
+h1 {
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0; }
+
+hr {
+  background: rgba(0, 0, 0, 0.5); }
+
+.heading {
+  margin: 12px; }
+
 .row {
   width: 100%;
   margin: auto; }
