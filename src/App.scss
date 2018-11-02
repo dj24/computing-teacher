@@ -9,6 +9,7 @@ $dark: #2A3547;
 $light: #A4A9B2;
 $bg: #EDF1F9;
 $margin: 12px;
+$break-medium: 960px;
 
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
@@ -26,6 +27,21 @@ a, a:hover{
 .col{
   padding:0;
   margin:$margin;
+}
+.inner{
+
+}
+.col.level{
+  flex: 0 0 300px;
+  width:300px;
+  h1{
+    position: absolute;
+    top:43%;
+    left:90px;
+    //width:300px;
+    text-align: center;
+    vertical-align: middle;
+  }
 }
 
 body{
@@ -53,6 +69,11 @@ hr{
 .heading{
   margin:$margin;
 }
+
+.heading.sub{
+  font-size:20px;
+}
+
 .row{
   width:100%;
   margin:auto;

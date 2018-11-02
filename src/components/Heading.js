@@ -11,4 +11,15 @@ class Heading extends Component {
   }
 }
 
+class SubHeading {
+  render() {
+    return (
+      <div class='heading sub'>
+        <h1>{this.props.children}</h1>
+      </div>
+    );
+  }
+}
+
 export default Heading;
+export {SubHeading};

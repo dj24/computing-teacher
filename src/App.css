@@ -12,6 +12,16 @@ a, a:hover {
   padding: 0;
   margin: 12px; }
 
+.col.level {
+  flex: 0 0 300px;
+  width: 300px; }
+  .col.level h1 {
+    position: absolute;
+    top: 43%;
+    left: 90px;
+    text-align: center;
+    vertical-align: middle; }
+
 body {
   margin: 0;
   background: #EDF1F9;
@@ -31,6 +41,9 @@ hr {
 
 .heading {
   margin: 12px; }
+
+.heading.sub {
+  font-size: 20px; }
 
 .row {
   width: 100%;
