@@ -15,7 +15,11 @@ class Card extends Component {
             animationDelay : this.props.delay + 'ms'
           }
         }
-        className={"animated " + (this.props.animation ? this.props.animation : 'fadeZoom') + " card-container col-12 col-xl-" + (this.size) + " col-lg-" + (this.mediumsize)}
+        className={" "
+          + (this.props.error ? 'animated shake ' : ' ')
+          + (this.props.animation ? this.props.animation : '')
+          + " card-container col-12 col-xl-"
+          + (this.size) + " col-lg-" + (this.mediumsize)}
       >
         <div className={"card"}>
           <div class="card-header">{this.props.title}</div>

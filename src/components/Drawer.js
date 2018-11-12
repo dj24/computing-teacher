@@ -8,7 +8,7 @@ import Logo from'../img/logo.png';
 class Drawer extends Component {
   render() {
     return (
-      <div class='drawer'>
+      <div className={'drawer ' + (this.props.blur ? '' : 'blur')}>
         <ul class="list-group">
           <img  src={Logo} className="logo" alt="logo"/>
           <DrawerItem icon="dashboard" label="Dashboard" link="/dashboard"/>
