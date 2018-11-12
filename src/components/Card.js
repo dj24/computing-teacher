@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class Card extends Component {
   constructor(props){
     super(props);
@@ -10,7 +9,14 @@ class Card extends Component {
 
   render() {
     return (
-      <div className={"card-container col-12 col-xl-" + (this.size) + " col-lg-" + (this.mediumsize)}>
+      <div
+        style={
+          {
+            animationDelay : this.props.delay + 'ms'
+          }
+        }
+        className={"animated " + (this.props.animation ? this.props.animation : 'fadeZoom') + " card-container col-12 col-xl-" + (this.size) + " col-lg-" + (this.mediumsize)}
+      >
         <div className={"card"}>
           <div class="card-header">{this.props.title}</div>
           <div class="card-body">
@@ -20,6 +26,7 @@ class Card extends Component {
           </div>
         </div>
       </div>
+
     );
   }
 }

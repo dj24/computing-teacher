@@ -4,18 +4,18 @@ import ReactDOM from 'react-dom';
 class Heading extends Component {
   render() {
     return (
-      <div class='heading'>
-        <h1>{this.props.children}</h1>
+      <div className={'heading'}>
+        <h1 className={this.props.animated ? 'animated fadeIn' : ''}>{this.props.children}</h1>
       </div>
     );
   }
 }
 
-class SubHeading {
+class SubHeading extends Heading {
   render() {
     return (
-      <div class='heading sub'>
-        <h1>{this.props.children}</h1>
+      <div class='heading'>
+        <h2>{this.props.children}</h2>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Bar, Doughnut, Line} from 'react-chartjs-2';
 import {SmallCard,MediumCard,LargeCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
-import Heading from '../components/Heading'
+import Heading, {SubHeading} from '../components/Heading'
 import Row from '../components/Row'
 import axios from 'axios';
 
@@ -37,9 +37,10 @@ class Dashboard extends Component {
       let pie_data = {
         datasets: [{
           data : [350, 500],
+          borderWidth: 0,
           backgroundColor: [
             'rgba(255,0,0,0.5)',
-            'rgba(0,0,0,0.2)'
+            'rgba(0,0,0,0.1)'
           ]
         }]
       }
@@ -89,13 +90,13 @@ class Dashboard extends Component {
             }]
         }
 
-
+        let delay = 200;
 
     return (
       <FadingScreen>
-        <Heading>Overview</Heading>
+        <Heading animated='true'>Overview</Heading>
         <Row>
-          <MediumCard title="Level">
+          <MediumCard title="Level" delay={delay}>
             <Row className={'inner'}>
               <div class="col level">
                 <Doughnut
@@ -119,9 +120,7 @@ class Dashboard extends Component {
             </Row>
           </MediumCard>
 
-
-
-          <MediumCard title="Graph">
+          <MediumCard title="Graph" delay={delay*2}>
             <Line
               data={data}
               height={300}
@@ -137,10 +136,11 @@ class Dashboard extends Component {
                }
               }}
             />
-        </MediumCard>
+          </MediumCard>
         </Row>
+        <Heading animated='true'>Tests</Heading>
         <Row>
-          { this.state.tests.map(test => <SmallCard title={test.title}>Test</SmallCard>)}
+          { this.state.tests.map((test,i) => <SmallCard delay={delay*3 + i*delay} title={test.title}>Test</SmallCard>)}
         </Row>
         <Row>
         </Row>

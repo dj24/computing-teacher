@@ -7,6 +7,8 @@ $primary: #7DE522;
 $accent: #D5E522;
 $dark: #2A3547;
 $light: #A4A9B2;
+$heading: rgba(0,0,0,0.6);
+$p: rgba(0,0,0,0.4);
 $bg: #EDF1F9;
 $margin: 12px;
 $break-medium: 960px;
@@ -69,14 +71,21 @@ hr{
 .heading{
   margin:$margin;
 }
-
-.heading.sub{
-  font-size:20px;
+h1{
+  color: $heading;
+}
+h2{
+  color:$p;
 }
 
 .row{
   width:100%;
   margin:auto;
+}
+
+.module{
+  margin:$margin;
+  margin-top:$margin*2;
 }
 
 .main{
@@ -88,11 +97,17 @@ hr{
 
 .card-container{
   padding:0;
+  opacity:1;
 }
 
-.module{
-  padding:$margin;
-  background: none;
+.anim {
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.75s;
+}
+
+.transparent{
+  opacity: 0;
+  transform:  scale(0.96) translateY(20px);
+  border:3px red solid;
 }
 
 .card{
@@ -200,8 +215,9 @@ hr{
   .module{
     margin-top: $nav-height;
     padding:0;
-    margin:0;
   }
+
+
   .search-container{
     float:right;
   }
@@ -245,16 +261,6 @@ nav{
     outline: none;
 }
 
-.module{
-  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.75s;
-}
-
-.transparent{
-  opacity: 0;
-  //transform: translateY(50px);
-  transform: scale(0.96);
-}
-
 .material-icons{
   position: relative;
   /* Adjust these values accordingly */
@@ -264,4 +270,29 @@ nav{
 
 .drawer-icon{
   margin-right: $margin;
+}
+
+@keyframes fadeZoom {
+  from,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  0% {
+    opacity: 0;
+    transform:translateY(0px) scale(0.95) ;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px) scale(1) ;
+  }
+}
+
+.fadeZoom {
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-name: fadeZoom;
+  animation-name: fadeZoom;
 }
