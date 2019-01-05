@@ -345,3 +345,10 @@ nav{
   transition: all ease 1s;
   border:1px solid red;
 }
+
+button{
+  background: $primary;
+  color:#fff;
+  outline:none;
+  border:none;
+}

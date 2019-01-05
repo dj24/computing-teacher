@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import './Loader.css';
+import 'hover.css/css/hover.css'
 
-import Home from './screens/Home'
+
 import Login from './screens/Login'
+import Tests from './screens/Tests'
 import Dashboard from './screens/Dashboard'
 import Navbar from './components/Navbar'
-import Spinner from './components/Spinner'
+
 import Drawer from './components/Drawer'
 
 class App extends Component {
@@ -17,8 +19,9 @@ class App extends Component {
   }
 
   state = {
-    loggedIn : false,
-    user: 'user',
+    //LOGIN STATUS
+    loggedIn : true,
+    user: 'admin',
   };
 
   componentDidMount(){
@@ -40,10 +43,7 @@ class App extends Component {
           this.setState({error : false});
         }.bind(this), 1000);
       }
-
-
     }
-
   }
 
   componentDidUpdate(prevState){
@@ -55,8 +55,8 @@ class App extends Component {
     if(this.state.loggedIn){
       return (<div class='col main'>
         <Navbar/>
-        <Route exact path="/" component={Home} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/test" component={Tests} />
       </div>)
     }
     else{
@@ -73,9 +73,7 @@ class App extends Component {
       <Router>
         <div className="row">
           <Drawer blur={this.state.loggedIn}/>
-
               {this.router()}
-
         </div>
       </Router>
     );

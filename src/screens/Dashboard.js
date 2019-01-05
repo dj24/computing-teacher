@@ -11,19 +11,11 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       active:false,
-      tests:[],
     };
   }
 
   componentDidMount(){
-    axios.get(`http://localhost:5000/query?type=getTests`)
-      .then(res => {
-        const tests = res.data;
-        this.setState({ tests });
-        setTimeout(function(){
-          this.setState({active:true})
-        }.bind(this), 50);
-      })
+
 
   }
 
@@ -138,10 +130,7 @@ class Dashboard extends Component {
             />
           </MediumCard>
         </Row>
-        <Heading animated='true'>Tests</Heading>
-        <Row>
-          { this.state.tests.map((test,i) => <SmallCard delay={delay*3 + i*delay} title={test.title}>Test</SmallCard>)}
-        </Row>
+
         <Row>
         </Row>
       </FadingScreen>

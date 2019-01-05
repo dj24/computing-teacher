@@ -11,7 +11,7 @@ class Drawer extends Component {
       <div className={'drawer ' + (this.props.blur ? '' : 'blur')}>
         <ul class="list-group">
           <img  src={Logo} className="logo" alt="logo"/>
-          <DrawerItem icon="dashboard" label="Dashboard" link="/dashboard"/>
+          <DrawerItem icon="dashboard" label="Dashboard" link="/"/>
           <DrawerItem icon="library_books" label="Learn" link="/learn"/>
           <DrawerItem icon="edit" label="Tests" link="/test"/>
           <DrawerItem icon="person" label="Account" link="/account"/>

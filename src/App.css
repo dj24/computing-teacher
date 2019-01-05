@@ -258,3 +258,9 @@ nav {
   transform: translateY(500px);
   transition: all ease 1s;
   border: 1px solid red; }
+
+button {
+  background: #7DE522;
+  color: #fff;
+  outline: none;
+  border: none; }
