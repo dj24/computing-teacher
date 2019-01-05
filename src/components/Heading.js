@@ -21,4 +21,4 @@ class SubHeading extends Heading {
 }
 
 export default Heading;
-export {SubHeading};
+export {SubHeading,Heading};

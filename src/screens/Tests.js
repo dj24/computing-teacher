@@ -11,7 +11,7 @@ class Tests extends Component {
     super(props);
     this.state = {
       tests:[],
-      showTest: false
+      showTest: true
     };
     this.toggleTest = this.toggleTest.bind(this);
   }

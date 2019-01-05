@@ -33,6 +33,10 @@ a, a:hover{
 .inner{
 
 }
+
+.col.test-graph{
+  flex: 0 0 0px;
+}
 .col.level{
   flex: 0 0 300px;
   width:300px;
@@ -50,7 +54,7 @@ body{
   margin: 0;
   background: $bg;
   font-family: $font;
-//  overflow-x: hidden;
+  overflow-x: hidden;
 }
 .navbar-nav{
   display: flex;
@@ -70,12 +74,13 @@ hr{
 
 .heading{
   margin:$margin;
-}
-h1{
-  color: $heading;
-}
-h2{
-  color:$p;
+  h1{
+    color: $heading;
+  }
+  h2{
+    color:$heading;
+    opacity:0.5;
+  }
 }
 
 .row{
