@@ -10,7 +10,11 @@ class Drawer extends Component {
     return (
       <div className={'drawer ' + (this.props.blur ? '' : 'blur')}>
         <ul class="list-group">
-          <img  src={Logo} className="logo" alt="logo"/>
+          <li style={{
+            textAlign: 'center',
+            borderRight: '1px solid rgba(0,0,0,0.05)',
+            borderBottom: '1px solid rgba(0,0,0,0.05)'
+          }}><img  src={Logo} className="logo" alt="logo"/></li>
           <DrawerItem icon="dashboard" label="Dashboard" link="/"/>
           <DrawerItem icon="library_books" label="Learn" link="/learn"/>
           <DrawerItem icon="edit" label="Tests" link="/test"/>

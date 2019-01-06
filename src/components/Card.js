@@ -55,6 +55,23 @@ class LargeCard extends Card {
   }
 }
 
+class ImageCard extends Component {
+  render() {
+    return (
+      <div class="col-4">
+        <div class="card">
+          <img class="card-img-top" src={this.props.src} alt="Card image cap"/>
+          <div class="card-body">
+            {this.props.children}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
+}
+
 
 export default Card;
-export {SmallCard,MediumCard,LargeCard};
+export {SmallCard,MediumCard,LargeCard,ImageCard};

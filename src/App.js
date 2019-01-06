@@ -6,6 +6,7 @@ import 'hover.css/css/hover.css'
 
 
 import Login from './screens/Login'
+import Learn from './screens/Learn'
 import Tests from './screens/Tests'
 import Dashboard from './screens/Dashboard'
 import Navbar from './components/Navbar'
@@ -57,6 +58,7 @@ class App extends Component {
         <Navbar/>
         <Route exact path="/" component={Dashboard} />
         <Route path="/test" component={Tests} />
+        <Route path="/learn" component={Learn} />
       </div>)
     }
     else{

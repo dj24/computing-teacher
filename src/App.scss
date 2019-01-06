@@ -119,10 +119,8 @@ hr{
   transition: $anim;
   box-shadow: $shadow;
   border:0;
-  border-radius: 0;
   margin:$margin;
-  padding:24px;
-  border-radius: 2px;
+  border-radius: 12px;
   background: white;
   .card-header{
     background:0;
@@ -130,23 +128,23 @@ hr{
     font-weight: 600;
     color:$primary;
     padding:$margin/2 0;
+    margin: $margin;
   }
   .card-body{
+    margin: $margin;
     padding:$margin 0;
     background: 0;
   }
 }
 
 .logo{
-  $img-height: $nav-height*0.75 - $margin/2 + 0.5;
-  height: $img-height;
-  width: $img-height*1.675;
-  margin: $margin auto ;
+  width: 100px;
+  margin: 15px auto ;
 }
 
 .drawer {
   width:250px;
-  background: $dark;
+  background: #fff;
   color:$light;
   position: fixed;
   overflow-x: hidden;
@@ -221,6 +219,7 @@ hr{
   .card{
     box-shadow: none;
     margin:0;
+    border-radius: 12px;
   }
   .module{
     margin-top: $nav-height;
@@ -245,7 +244,6 @@ nav{
   height: $nav-height;
   background: white;
   colour:$light;
-  box-shadow: $shadow;
 }
 
 .nav-link{

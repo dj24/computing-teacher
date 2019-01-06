@@ -3,6 +3,7 @@ import Overlay from '../components/Overlay'
 import {Heading, SubHeading} from '../components/Heading'
 import Row from '../components/Row'
 import Button from '../components/Button'
+import TestContent from '../components/TestContent'
 import {Bar, Doughnut, Line} from 'react-chartjs-2';
 
 class Test extends Component {
@@ -45,9 +46,15 @@ class Test extends Component {
     const testStyle = {
       position:'absolute',
       transition: 'all ease 1s',
-      width : '100%',
       transform: 'translateX(100%)',
+      width: '100%',
     };
+
+    const cardStyle = {
+      width: '100%',
+      maxWidth: '800px',
+      margin: 'auto',
+    }
 
     let pie_data = {
       datasets: [{
@@ -62,14 +69,8 @@ class Test extends Component {
 
     return (
         <div style={testStyle}>
-          <div className={"card"}>
-            <div style={headerStyle} class="card-header">
-              Test Title
-              <a onClick={this.props.onClose} href="#">
-                <i class="material-icons">close</i>
-              </a>
-            </div>
-            <div class="card-body">
+          <div style={cardStyle} className={"card"}>
+            <div>
             <Row>
               <div class="col test-graph">
                 <Doughnut
@@ -89,8 +90,18 @@ class Test extends Component {
               </div>
             </Row>
             <Row>
+              <TestContent/>
+            </Row>
+            <Row style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+            }}>
               <button onClick={this.prevQuestion}>Prev</button>
               <button onClick={this.nextQuestion}>Next</button>
+              <button onClick={this.confirm}>Confirm</button>
+              <a onClick={this.props.onClose} href="#">
+                <i class="material-icons">close</i>
+              </a>
             </Row>
 
 
