@@ -46,7 +46,7 @@ class Test extends Component {
     const testStyle = {
       position:'absolute',
       transition: 'all ease 1s',
-      transform: 'translateX(100%)',
+      transform: 'translateX(150%)',
       width: '100%',
     };
 

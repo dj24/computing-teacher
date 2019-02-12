@@ -58,9 +58,9 @@ class LargeCard extends Card {
 class ImageCard extends Component {
   render() {
     return (
-      <div class="col-4">
-        <div class="card">
-          <img class="card-img-top" src={this.props.src} alt="Card image cap"/>
+      <div class="col-4 card-container">
+        <div class="card image-card">
+          <div class="card-img-top" style={{backgroundImage: 'url(' + this.props.src +')'}}></div>
           <div class="card-body">
             {this.props.children}
           </div>

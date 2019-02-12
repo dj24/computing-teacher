@@ -4,13 +4,14 @@ import Heading, {SubHeading} from '../components/Heading'
 import {SmallCard,MediumCard,LargeCard,ImageCard} from '../components/Card'
 import Test from '../components/Test'
 import Row from '../components/Row'
+import ProgressBar from '../components/ProgressBar'
 import axios from 'axios';
 
 class Learn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lessons:[1,2,3]
+      lessons:[1,2,3,4,5,6]
     };
     this.toggleTest = this.toggleTest.bind(this);
   }
@@ -48,12 +49,19 @@ class Learn extends Component {
     return (
       <FadingScreen>
 
-      <Heading animated='true'>Learn</Heading>
+
       <Row style={screenStyle}>
+        <div class="col-12"><Heading animated='true'>Learn</Heading></div>
         { this.state.lessons.map((test,i) =>
-          <ImageCard src={'https://images.pexels.com/photos/825258/pexels-photo-825258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'}>
-            <h5>Lesson Title</h5>
+          <ImageCard className={'learn-card'} src={'https://images.pexels.com/photos/825258/pexels-photo-825258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'}>
+            <a href="#"><h3>Lesson Title</h3></a>
             <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div style={{display:'flex',alignItems:'center'}} className={'bottom'}>
+              <ProgressBar width={50}/>
+              <h5 style={{padding:0}}>50%</h5>
+            </div>
+
+
           </ImageCard>
         )}
         {test}
