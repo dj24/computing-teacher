@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import './Loader.css';
 import 'hover.css/css/hover.css'
+import axios from 'axios'
 
 
 import Login from './screens/Login'
@@ -17,41 +18,68 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.handlePassChange = this.handlePassChange.bind(this);
   }
 
   state = {
     //LOGIN STATUS
-    loggedIn : true,
-    user: 'admin',
+    loggedIn : false,
+    user: '',
+    password: '',
   };
 
   componentDidMount(){
-
+    let token = localStorage.getItem('token');
+    console.log(token);
+    if(token){
+      console.log({token});
+      axios.post('http://localhost:5000/verifyToken',{token})
+      .then((response) => {
+        //token verified
+        this.setState({loggedIn:true});
+      })
+      .catch((error) => {
+        //token invalid
+        console.log(error);
+      })
+    }
+    axios.get('http://localhost:5000')
+    .then((response) => {
+      console.log(response);
+    })
+    .catch(function (error) {
+    console.log(error);
+  });
+ ;
   }
 
-  handleChange(event) {
-    this.setState({user: event.target.value});
-  }
+  handleChange(event) { this.setState({user: event.target.value}); }
+  handlePassChange(event) { this.setState({password: event.target.value}); }
 
   login = () => {
-    if(this.state.user == "admin"){
+    let payload = {
+      username : this.state.user,
+      password : this.state.password,
+    }
+    axios.post('http://localhost:5000/login',payload)
+    .then((response) => {
+      //login sucesss
       this.setState({loggedIn:true});
-    }
-    else{
+      localStorage.setItem('token', response.data.token);
+    })
+    .catch((error) => {
+      //login failure
+      console.log(error);
       this.setState({error : true});
-      if(!this.state.error){
-        setTimeout(function(){
-          this.setState({error : false});
-        }.bind(this), 1000);
-      }
-    }
+      setTimeout(function(){
+        this.setState({error : false});
+      }.bind(this), 1000);
+
+    })
+
+
   }
 
-  componentDidUpdate(prevState){
-    if(prevState.loggedIn == false){
-
-    }
-  }
   router = () => {
     if(this.state.loggedIn){
       return (<div class='col main'>
@@ -64,8 +92,8 @@ class App extends Component {
     else{
       return <Login
         error={this.state.error}
-        user={this.state.user}
         onChange={this.handleChange}
+        onPassChange={this.handlePassChange}
         onClick={this.login.bind(this)}/>
     }
   }

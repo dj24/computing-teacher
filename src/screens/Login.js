@@ -16,8 +16,8 @@ class Login extends Component {
     return (
       <Overlay>
           <SmallCard error={this.props.error} title="login">
-              <Row><Input onChange={this.props.onChange} value={this.props.user} placeholder="Email"/></Row>
-              <Row><Input placeholder="Password" secure="true"/></Row>
+              <Row><Input onChange={this.props.onChange} placeholder="Email"/></Row>
+              <Row><Input onChange={this.props.onPassChange} placeholder="Password" secure="true"/></Row>
               <Button icon={'sign-in-alt'} onClick={this.props.onClick.bind(this)}>
                 Login
               </Button>

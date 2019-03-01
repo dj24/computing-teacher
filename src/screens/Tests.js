@@ -11,7 +11,8 @@ class Tests extends Component {
     super(props);
     this.state = {
       tests:[],
-      showTest: false
+      showTest: false,
+      activeTest: null,
     };
     this.toggleTest = this.toggleTest.bind(this);
   }
@@ -20,11 +21,13 @@ class Tests extends Component {
       .then(res => {
         const tests = res.data;
         this.setState({ tests });
-        console.log(tests);
+        
       })
   }
-  toggleTest(){
+
+  toggleTest(i){
     this.setState({showTest:!this.state.showTest});
+    this.setState({activeTest: this.state.tests[i]});
   }
 
   render() {
@@ -43,7 +46,7 @@ class Tests extends Component {
     };
 
 
-    let test = <Test onClose={this.toggleTest} show={this.state.showTest}/>;
+    let test = <Test test={this.state.activeTest} onClose={this.toggleTest} show={this.state.showTest}/>;
 
     return (
       <FadingScreen>

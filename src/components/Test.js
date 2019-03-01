@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
-import Overlay from '../components/Overlay'
 import {Heading, SubHeading} from '../components/Heading'
 import Row from '../components/Row'
-import Button from '../components/Button'
 import TestContent from '../components/TestContent'
-import {Bar, Doughnut, Line} from 'react-chartjs-2';
+import {Doughnut} from 'react-chartjs-2';
 
 class Test extends Component {
   constructor(props){
     super(props);
     this.state = {
-      totalQuestions : 6,
+      totalQuestions : 0,
       currentQuestion: 0,
     };
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
+
+
+
+    if(props.test){
+      this.setState({totalQuestions : props.test.questions.length});
+
+    }
   }
 
   nextQuestion(){
@@ -26,6 +31,10 @@ class Test extends Component {
     if(this.state.currentQuestion > 0){
       this.setState({currentQuestion:this.state.currentQuestion - 1});
     }
+  }
+
+  componentDidUpdate(){
+    //console.log(this.props);
   }
 
   render() {

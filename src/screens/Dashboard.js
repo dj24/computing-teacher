@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {Bar, Doughnut, Line} from 'react-chartjs-2';
-import {SmallCard,MediumCard,LargeCard} from '../components/Card'
+import {Doughnut, Line} from 'react-chartjs-2';
+import {MediumCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
 import Heading, {SubHeading} from '../components/Heading'
 import Row from '../components/Row'
-import axios from 'axios';
+//import axios from 'axios';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -113,6 +113,7 @@ class Dashboard extends Component {
           </MediumCard>
 
           <MediumCard title="Graph" delay={delay*2}>
+            {/* BROKEN COMPONENT
             <Line
               data={data}
               height={300}
@@ -128,6 +129,7 @@ class Dashboard extends Component {
                }
               }}
             />
+            */}
           </MediumCard>
         </Row>
 

@@ -288,6 +288,15 @@ nav {
   transition: all ease 1s;
   border: 1px solid red; }
 
+.notifications{
+  display:flex;
+}
+
+.notifications a{
+  cursor: pointer;
+}
+
+
 button {
   background: #7DE522;
   color: #fff;
