@@ -15,10 +15,8 @@ class Test extends Component {
     this.prevQuestion = this.prevQuestion.bind(this);
 
 
-
     if(props.test){
       this.setState({totalQuestions : props.test.questions.length});
-
     }
   }
 
@@ -38,26 +36,12 @@ class Test extends Component {
   }
 
   render() {
-    let move;
-    if(this.props.show){
-      move = '0';
-    }
-    else{
-      move = '100%';
-    }
 
     const headerStyle = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
     }
-
-    const testStyle = {
-      position:'absolute',
-      transition: 'all ease 1s',
-      transform: 'translateX(150%)',
-      width: '100%',
-    };
 
     const cardStyle = {
       width: '100%',
@@ -77,7 +61,7 @@ class Test extends Component {
     }
 
     return (
-        <div style={testStyle}>
+        <div>
           <div style={cardStyle} className={"card"}>
             <div>
             <Row>

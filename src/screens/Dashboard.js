@@ -4,6 +4,8 @@ import {MediumCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
 import Heading, {SubHeading} from '../components/Heading'
 import Row from '../components/Row'
+import Notification from '../components/Notification'
+import  ReactDOM  from 'react-dom';
 //import axios from 'axios';
 
 class Dashboard extends Component {
@@ -15,8 +17,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount(){
-
-
+    ReactDOM.render(<Notification show="true" />, document.getElementById('notifications'));
   }
 
   componentWillUnmount() {

@@ -4,11 +4,10 @@ import './App.css';
 import './Loader.css';
 import 'hover.css/css/hover.css'
 import axios from 'axios'
-
-
 import Login from './screens/Login'
 import Learn from './screens/Learn'
 import Tests from './screens/Tests'
+import TestScreen from './screens/TestScreen'
 import Dashboard from './screens/Dashboard'
 import Navbar from './components/Navbar'
 
@@ -23,6 +22,7 @@ class App extends Component {
 
   state = {
     //LOGIN STATUS
+    admin: false,
     loggedIn : false,
     user: '',
     password: '',
@@ -76,8 +76,6 @@ class App extends Component {
       }.bind(this), 1000);
 
     })
-
-
   }
 
   router = () => {
@@ -85,7 +83,8 @@ class App extends Component {
       return (<div class='col main'>
         <Navbar/>
         <Route exact path="/" component={Dashboard} />
-        <Route path="/test" component={Tests} />
+        <Route path="/tests" component={Tests} />
+        <Route path="/test/:id" component={TestScreen} />
         <Route path="/learn" component={Learn} />
       </div>)
     }
@@ -102,7 +101,8 @@ class App extends Component {
     return (
       <Router>
         <div className="row">
-          <Drawer blur={this.state.loggedIn}/>
+          <Drawer admin={this.state.admin} blur={this.state.loggedIn}/>
+              <div id="notifications"></div>
               {this.router()}
         </div>
       </Router>

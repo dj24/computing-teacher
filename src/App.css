@@ -288,17 +288,30 @@ nav {
   transition: all ease 1s;
   border: 1px solid red; }
 
-.notifications{
-  display:flex;
-}
-
-.notifications a{
-  cursor: pointer;
-}
-
-
 button {
   background: #7DE522;
   color: #fff;
   outline: none;
   border: none; }
+
+.notification {
+  position: fixed;
+  width: 500px;
+  height: 100px;
+  background: linear-gradient(to right, #7DE522 0%, #D5E522 100%);
+  z-index: 4;
+  bottom: 50px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all ease 1s; }
+  .notification.show {
+    transform: translateY(0);
+    opacity: 1; }
