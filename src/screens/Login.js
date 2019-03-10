@@ -6,7 +6,6 @@ import Row from '../components/Row'
 import Input from '../components/Input'
 import Button from '../components/Button'
 
-
 class Login extends Component {
 
   componentWillUnmount(){
@@ -14,7 +13,7 @@ class Login extends Component {
   }
 
   render() {
-    
+
 
     return (
       <Overlay>

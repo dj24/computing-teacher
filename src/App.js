@@ -10,8 +10,11 @@ import Tests from './screens/Tests'
 import TestScreen from './screens/TestScreen'
 import Dashboard from './screens/Dashboard'
 import Navbar from './components/Navbar'
-
 import Drawer from './components/Drawer'
+import Admin from './screens/Admin'
+import {notification} from './util'
+
+let host = 'http://localhost:5000';
 
 class App extends Component {
   constructor(props) {
@@ -28,29 +31,31 @@ class App extends Component {
     password: '',
   };
 
+  open(){
+    this.setState({loggedIn:true});
+    let queryString = host + '/query?type=isAdmin&criteria={"username":"' + this.state.user +'"}'
+    axios.get(queryString)
+    .then((admin) => {
+      if(admin){
+        this.setState({admin:true});
+      }
+    })
+  }
+
   componentDidMount(){
     let token = localStorage.getItem('token');
-    console.log(token);
     if(token){
-      console.log({token});
       axios.post('http://localhost:5000/verifyToken',{token})
       .then((response) => {
         //token verified
-        this.setState({loggedIn:true});
+        this.open();
+        //notification("Token Verified");
       })
       .catch((error) => {
         //token invalid
-        console.log(error);
+        //(error,true);
       })
     }
-    axios.get('http://localhost:5000')
-    .then((response) => {
-      console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-  });
- ;
   }
 
   handleChange(event) { this.setState({user: event.target.value}); }
@@ -64,13 +69,15 @@ class App extends Component {
     axios.post('http://localhost:5000/login',payload)
     .then((response) => {
       //login sucesss
-      this.setState({loggedIn:true});
+      this.open();
       localStorage.setItem('token', response.data.token);
+      notification("Logged in successfuly");
     })
     .catch((error) => {
       //login failure
       console.log(error);
       this.setState({error : true});
+      //notification(error,true);
       setTimeout(function(){
         this.setState({error : false});
       }.bind(this), 1000);
@@ -86,8 +93,10 @@ class App extends Component {
         <Route path="/tests" component={Tests} />
         <Route path="/test/:id" component={TestScreen} />
         <Route path="/learn" component={Learn} />
+        <Route path="/admin" component={Admin} />
       </div>)
     }
+
     else{
       return <Login
         error={this.state.error}

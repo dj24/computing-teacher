@@ -38,12 +38,24 @@ class TestContent extends Component {
     super(props);
     this.state = {
       select : null,
-      answers: [
-        'Answer1',
-        'Answer2',
-        'Answer3'
-      ]
+      answers: []
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.answers !== nextProps.answers) {
+      return {answers : nextProps.answers};
+    }
+    // Return null to indicate no change to state.
+    return null;
+  }
+
+  componentDidUpdate(){
+    if(this.props.answers){
+      //console.log(this.props);
+      this.setState({answers:this.props.answers});
+    }
+
   }
 
   select(i){
@@ -60,13 +72,19 @@ class TestContent extends Component {
       background: '#f00'
     }
 
-    return (
-      <div style={style}>
-      { this.state.answers.map((answer,i) =>
+    let content;
+    if(this.state.answers){
+      content = this.state.answers.map((answer,i) =>
         <Choice onClick={() => this.select(i)} select={i == this.state.select} key={i}>
           {i + 1}. {answer}
         </Choice>
-      )}
+      )
+    }
+
+
+    return (
+      <div style={style}>
+        {content}
       </div>
     );
   }

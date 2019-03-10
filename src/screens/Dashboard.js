@@ -4,9 +4,9 @@ import {MediumCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
 import Heading, {SubHeading} from '../components/Heading'
 import Row from '../components/Row'
-import Notification from '../components/Notification'
-import  ReactDOM  from 'react-dom';
+import {notification} from '../util'
 //import axios from 'axios';
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -17,14 +17,12 @@ class Dashboard extends Component {
   }
 
   componentDidMount(){
-    ReactDOM.render(<Notification show="true" />, document.getElementById('notifications'));
+    notification("Dashboard Screen",true);
   }
 
   componentWillUnmount() {
-  this.setState({active:false})
+    this.setState({active:false})
   }
-
-
 
   render() {
       let pie_data = {
@@ -37,8 +35,6 @@ class Dashboard extends Component {
           ]
         }]
       }
-
-
 
       function addDate(days){
         let date = new Date();

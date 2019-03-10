@@ -6,6 +6,7 @@ import Test from '../components/Test'
 import Row from '../components/Row'
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import {notification} from '../util'
 
 class Tests extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Tests extends Component {
     };
   }
   componentDidMount(){
+    //notification("Tests Screen");
     axios.get(`http://localhost:5000/query?type=getTests`)
       .then(res => {
         const tests = res.data;

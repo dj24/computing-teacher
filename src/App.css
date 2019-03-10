@@ -294,14 +294,17 @@ button {
   outline: none;
   border: none; }
 
-.notification {
+.notifications {
   position: fixed;
+  z-index: 4;
+  bottom: 20px;
+  right: 20px; }
+
+.notification {
+  margin: 20px 0;
   width: 500px;
   height: 100px;
   background: linear-gradient(to right, #7DE522 0%, #D5E522 100%);
-  z-index: 4;
-  bottom: 50px;
-  right: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -310,8 +313,13 @@ button {
   font-size: 18px;
   font-weight: 600;
   opacity: 0;
-  transform: translateY(50px);
-  transition: all ease 1s; }
+  transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.6s; }
   .notification.show {
-    transform: translateY(0);
     opacity: 1; }
+  .notification.error {
+    background: linear-gradient(to right, #E54222 0%, #E56322 100%); }
+  .notification #close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    cursor: pointer; }

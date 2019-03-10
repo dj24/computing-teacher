@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 
 class Card extends Component {
-  constructor(props){
-    super(props);
-    this.size='12';
-    this.mediumsize = '12';
-  }
+
+  size='12';
+  mediumsize = '12';
 
   render() {
+
+    let header;
+
+    if(this.props.title){
+      header = <div class="card-header">{this.props.title}</div>
+    }
+
     return (
       <div
         style={
@@ -22,7 +27,7 @@ class Card extends Component {
           + (this.size) + " col-lg-" + (this.mediumsize)}
       >
         <div className={"card"}>
-          <div class="card-header">{this.props.title}</div>
+          {header}
           <div class="card-body">
               {this.props.children}
           </div>
