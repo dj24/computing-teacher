@@ -55,9 +55,7 @@ class MediumCard extends Card {
 }
 
 class LargeCard extends Card {
-  constructor(props){
-    super(props);
-  }
+  
 }
 
 class ImageCard extends Component {

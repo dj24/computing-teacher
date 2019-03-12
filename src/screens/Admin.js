@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FadingScreen from '../components/FadingScreen'
 import {LargeCard} from '../components/Card'
-import Row from '../components/Row'
 import Heading from '../components/Heading'
 import Button from '../components/Button'
 

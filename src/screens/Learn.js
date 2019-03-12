@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import FadingScreen from '../components/FadingScreen';
-import Heading, {SubHeading} from '../components/Heading'
-import {SmallCard,MediumCard,LargeCard,ImageCard} from '../components/Card'
-import Test from '../components/Test'
+import Heading from '../components/Heading'
+import {ImageCard} from '../components/Card'
 import Row from '../components/Row'
 import ProgressBar from '../components/ProgressBar'
-import axios from 'axios';
+//import axios from 'axios';
 
 class Learn extends Component {
   constructor(props) {
@@ -43,9 +42,6 @@ class Learn extends Component {
       transform: 'translateX(' + move + ')',
     };
 
-
-    let test = <Test onClose={this.toggleTest} show={this.state.showTest}/>;
-
     return (
       <FadingScreen>
 
@@ -54,7 +50,7 @@ class Learn extends Component {
         <div class="col-12"><Heading animated='true'>Learn</Heading></div>
         { this.state.lessons.map((test,i) =>
           <ImageCard className={'learn-card'} src={'https://images.pexels.com/photos/825258/pexels-photo-825258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'}>
-            <a href="#"><h3>Lesson Title</h3></a>
+            <a ><h3>Lesson Title</h3></a>
             <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div style={{display:'flex',alignItems:'center'}} className={'bottom'}>
               <ProgressBar width={50}/>
@@ -64,7 +60,6 @@ class Learn extends Component {
 
           </ImageCard>
         )}
-        {test}
       </Row>
       </FadingScreen>
     );

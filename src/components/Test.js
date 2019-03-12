@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Heading, SubHeading} from '../components/Heading'
 import Row from '../components/Row'
-import TestContent from '../components/TestContent'
 import {Doughnut} from 'react-chartjs-2';
 import {Link} from 'react-router-dom';
 
@@ -93,13 +92,13 @@ class Test extends Component {
   }
 
   render() {
-
+    /*
     const headerStyle = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
     }
-
+*/
     const cardStyle = {
       width: '100%',
       maxWidth: '800px',
@@ -134,6 +133,15 @@ class Test extends Component {
       )
     }
 
+    let current = this.state.currentQuestion + 1;
+    let total = this.state.totalQuestions;
+    let nextBtn;
+    if(current === total){
+      nextBtn = <button onClick={this.finishTest}>Finish</button>
+    }
+    else{
+      nextBtn = <button onClick={this.nextQuestion}>Next</button>
+    }
 
     return (
         <div>
@@ -153,20 +161,20 @@ class Test extends Component {
                   }}/>
               </div>
               <div class="col">
-                <SubHeading>QUESTION {this.state.currentQuestion + 1} OF {this.state.totalQuestions}</SubHeading>
+                <SubHeading>QUESTION {current} OF {total}</SubHeading>
                 {title}
               </div>
             </Row>
-            <Row>
+
               {/**<TestContent answers={answers}/>**/}
               {choices}
-            </Row>
+
             <Row style={{
               display: 'flex',
               justifyContent: 'space-around',
             }}>
               <button onClick={this.prevQuestion}>Prev</button>
-              <button onClick={this.nextQuestion}>Next</button>
+              {nextBtn}
               <button onClick={this.confirm}>Confirm</button>
               <Link to="/tests">
                 <i class="material-icons">close</i>

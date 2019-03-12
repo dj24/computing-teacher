@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Doughnut, Line} from 'react-chartjs-2';
-import {MediumCard} from '../components/Card'
+import {Doughnut} from 'react-chartjs-2';
+import {MediumCard,LargeCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
 import Heading, {SubHeading} from '../components/Heading'
 import Row from '../components/Row'
@@ -35,7 +35,7 @@ class Dashboard extends Component {
           ]
         }]
       }
-
+/*
       function addDate(days){
         let date = new Date();
         date.setDate(date.getDate() + days);
@@ -78,14 +78,13 @@ class Dashboard extends Component {
                 fill:false
             }]
         }
-
+*/
         let delay = 200;
 
     return (
       <FadingScreen>
-        <Heading animated='true'>Overview</Heading>
         <Row>
-          <MediumCard title="Level" delay={delay}>
+          <LargeCard delay={delay}>
             <Row className={'inner'}>
               <div class="col level">
                 <Doughnut
@@ -107,7 +106,7 @@ class Dashboard extends Component {
                 </SubHeading>
               </div>
             </Row>
-          </MediumCard>
+          </LargeCard>
 
           <MediumCard title="Graph" delay={delay*2}>
             {/* BROKEN COMPONENT

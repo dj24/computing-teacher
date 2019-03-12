@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import FadingScreen from '../components/FadingScreen';
-import Heading, {SubHeading} from '../components/Heading'
-import {SmallCard,MediumCard,LargeCard,ImageCard} from '../components/Card'
-import Test from '../components/Test'
+import {SmallCard} from '../components/Card'
+import Heading from '../components/Heading'
 import Row from '../components/Row'
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import {notification} from '../util'
+//import {notification} from '../util'
 
 class Tests extends Component {
   constructor(props) {

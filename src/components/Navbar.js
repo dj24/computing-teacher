@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {notification} from '../util'
+//import {notification} from '../util'
 
 function logout(){
   localStorage.removeItem('token');

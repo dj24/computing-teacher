@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import FadingScreen from '../components/FadingScreen';
-import Heading, {SubHeading} from '../components/Heading'
 import Test from '../components/Test'
-import { Link } from "react-router-dom";
 import axios from 'axios';
-import {notification} from '../util'
+//import {notification} from '../util'
 
 class TestScreen extends Component {
 

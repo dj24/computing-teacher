@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {Animated} from "react-animated-css";
 import Overlay from '../components/Overlay'
-import {SmallCard,MediumCard,LargeCard} from '../components/Card'
+import {SmallCard} from '../components/Card'
 import Row from '../components/Row'
 import Input from '../components/Input'
 import Button from '../components/Button'

@@ -23,6 +23,7 @@ class Notification extends Component {
   }
 
   render(){
+    /*
     let className = "notification";
     if(this.state.active){
       className+= ' show';
@@ -30,7 +31,7 @@ class Notification extends Component {
     if(this.state.error){
       className+= ' error'
     }
-
+    */
 
     /*
     const notifications = this.state.notifications.map((message,i) =>
