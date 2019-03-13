@@ -109,10 +109,10 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="row">
+        <div>
           <Drawer admin={this.state.admin} blur={this.state.loggedIn}/>
-              <div id="notifications"></div>
-              {this.router()}
+          <div id="notifications"></div>
+          {this.router()}
         </div>
       </Router>
     );

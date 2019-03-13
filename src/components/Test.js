@@ -25,6 +25,10 @@ function shuffle(array) {
 
 class Choice extends Component {
 
+  getAnswer = () => {
+    this.props.onSelect(this.props.children);
+  }
+
   render() {
     let base = {
       margin: '20px',
@@ -49,7 +53,7 @@ class Choice extends Component {
     let style = this.props.select ? selectedStyle : defaultStyle;
 
     return (
-      <div onClick={this.props.onClick} style={{...base,...style}}>
+      <div onClick={this.getAnswer} style={{...base,...style}}>
         {this.props.children}
       </div>
     );
@@ -60,12 +64,18 @@ class Test extends Component {
   constructor(props){
     super(props);
     this.state = {
+      answers: [],
       questions: [],
       totalQuestions : 0,
       currentQuestion: 0,
     };
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
+  }
+
+  componentDidMount(){
+    console.log(this.props.test.questions);
+    this.setState({totalQuestions:this.props.test.questions.length});
   }
 
   nextQuestion(){
@@ -79,17 +89,24 @@ class Test extends Component {
     }
   }
 
-  componentDidUpdate(){
-    //console.log(this.props);
+  selectAnswer = (answer) =>{
+    let answers = this.state.answers;
+    answers[this.state.currentQuestion] = answer;
+    this.setState({answers});
   }
 
-  componentDidMount(){
-    if(this.props.test){
-      this.setState({totalQuestions : this.props.test.questions.length});
-      this.setState({questions: this.props.test.questions});
+  finishTest = () => {
+    let accuracy = 0;
+    let answers = this.state.answers;
+    let questions = this.props.test.questions;
+    for(let i = 0; i < answers.length; i++){
+      if(questions[i].correct_answer === answers[i]){
+        accuracy++;
+      }
     }
-    console.log(this.props.test);
+    console.log(accuracy/answers.length);
   }
+
 
   render() {
     /*
@@ -98,7 +115,7 @@ class Test extends Component {
       alignItems: 'center',
       justifyContent: 'space-between',
     }
-*/
+    */
     const cardStyle = {
       width: '100%',
       maxWidth: '800px',
@@ -124,11 +141,12 @@ class Test extends Component {
       questions = this.props.test.questions;
       currentQuestion = questions[this.state.currentQuestion];
       answers = currentQuestion.wrong_answers.concat(currentQuestion.correct_answer);
+
       title = <Heading>{currentQuestion.question}</Heading>
 
       choices = shuffle(answers).map((answer,i) =>
-        <Choice select={false} key={i}>
-          {i + 1}. {answer}
+        <Choice onSelect={this.selectAnswer} key={i}>
+          {answer}
         </Choice>
       )
     }
@@ -165,17 +183,13 @@ class Test extends Component {
                 {title}
               </div>
             </Row>
-
-              {/**<TestContent answers={answers}/>**/}
               {choices}
-
             <Row style={{
               display: 'flex',
               justifyContent: 'space-around',
             }}>
               <button onClick={this.prevQuestion}>Prev</button>
               {nextBtn}
-              <button onClick={this.confirm}>Confirm</button>
               <Link to="/tests">
                 <i class="material-icons">close</i>
               </Link>
