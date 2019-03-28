@@ -64,6 +64,9 @@ hr {
   height: auto;
   margin-left: 250px;
   position: relative; }
+  @media (min-width: 992px) {
+    .main {
+      width: calc(100% - 250px); } }
 
 .card-container {
   padding: 0;
@@ -323,3 +326,15 @@ button {
     top: 0;
     right: 10px;
     cursor: pointer; }
+
+.flex {
+  display: flex; }
+
+.link {
+  cursor: pointer; }
+  .link:hover {
+    text-decoration: underline !important;
+    color: #7DE522 !important; }
+  .link.forgot {
+    margin-left: 1.5vw;
+    font-size: 12px; }

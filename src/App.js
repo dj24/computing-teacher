@@ -12,6 +12,7 @@ import Dashboard from './screens/Dashboard'
 import Navbar from './components/Navbar'
 import Drawer from './components/Drawer'
 import Admin from './screens/Admin'
+import Register from './screens/Register'
 import {notification} from './util'
 
 let host = 'http://localhost:5000';
@@ -26,6 +27,7 @@ class App extends Component {
   state = {
     //LOGIN STATUS
     admin: false,
+    register: false,
     loggedIn : false,
     user: '',
     password: '',
@@ -85,6 +87,13 @@ class App extends Component {
     })
   }
 
+  hideRegister(){
+    this.setState({register:false});
+  }
+  showRegister(){
+    this.setState({register:true});
+  }
+
   router = () => {
     if(this.state.loggedIn){
       return (<div class='col main'>
@@ -98,13 +107,19 @@ class App extends Component {
     }
 
     else{
-      return <Login
-        error={this.state.error}
-        onChange={this.handleChange}
-        onPassChange={this.handlePassChange}
-        onClick={this.login.bind(this)}/>
-    }
+      if(this.state.register){
+        return <Register hideRegister={this.hideRegister.bind(this)}/>
+      }
+      else{
+        return <Login
+          error={this.state.error}
+          onChange={this.handleChange}
+          onPassChange={this.handlePassChange}
+          showRegister={this.showRegister.bind(this)}
+          onClick={this.login.bind(this)}/>
+      }
   }
+}
 
   render() {
     return (

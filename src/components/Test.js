@@ -3,6 +3,8 @@ import {Heading, SubHeading} from '../components/Heading'
 import Row from '../components/Row'
 import {Doughnut} from 'react-chartjs-2';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2'
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -24,7 +26,6 @@ function shuffle(array) {
 }
 
 class Choice extends Component {
-
   getAnswer = () => {
     this.props.onSelect(this.props.children);
   }
@@ -74,7 +75,9 @@ class Test extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props.test.questions);
+    let answers = shuffle(this.state.answers);
+    this.setState(answers);
+    console.log(this.props.test._id);
     this.setState({totalQuestions:this.props.test.questions.length});
   }
 
@@ -104,18 +107,35 @@ class Test extends Component {
         accuracy++;
       }
     }
-    console.log(accuracy/answers.length);
+    let score = accuracy/answers.length;
+
+    let token = localStorage.getItem('token');
+    if(token){
+      axios.post('http://localhost:5000/verifyToken',{token})
+      .then((response) => {
+        let payload = {
+          testID : this.props.test._id,
+          userID : response.data.id,
+          result: score
+        }
+        axios.post('http://localhost:5000/query?type=addTestLog', payload)
+        .then(function (response) {
+          console.log(response);
+          Swal.fire('Well Done!', 'You completed the test, scoring ' + Math.round(score*100) + '%', 'success')
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
   }
 
 
   render() {
-    /*
-    const headerStyle = {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    }
-    */
     const cardStyle = {
       width: '100%',
       maxWidth: '800px',
@@ -144,8 +164,8 @@ class Test extends Component {
 
       title = <Heading>{currentQuestion.question}</Heading>
 
-      choices = shuffle(answers).map((answer,i) =>
-        <Choice onSelect={this.selectAnswer} key={i}>
+      choices = answers.map((answer,i) =>
+        <Choice onSelect={this.selectAnswer} select={this.state.answers[this.state.currentQuestion] === answer} key={i}>
           {answer}
         </Choice>
       )

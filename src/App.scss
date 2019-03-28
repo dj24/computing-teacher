@@ -97,6 +97,9 @@ hr{
   margin:auto;
   height:auto;
   margin-left: 250px;
+  @media(min-width:992px){
+    width:calc(100% - 250px);
+  }
   position:relative;
 }
 
@@ -425,5 +428,21 @@ button{
     top:0;
     right:10px;
     cursor:pointer;
+  }
+}
+
+.flex{
+  display: flex;
+}
+
+.link{
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline!important;
+    color:$primary !important;
+  }
+  &.forgot{
+    margin-left:1.5vw;
+    font-size:12px;
   }
 }
