@@ -5,6 +5,7 @@ import Heading from '../components/Heading'
 import Button from '../components/Button'
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {host} from '../util';
 
 class Question extends Component {
   render() {
@@ -73,7 +74,7 @@ class Admin extends Component {
       title,
       questions
     }
-    axios.post('http://localhost:5000/query?type=addTest', test)
+    axios.post(host + '/query?type=addTest', test)
     .then(function (response) {
       Swal.fire('Test Added!', '"' + title +'" added to database.', 'success');
     })

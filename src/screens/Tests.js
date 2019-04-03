@@ -6,7 +6,7 @@ import ProgressBar from '../components/ProgressBar';
 import Row from '../components/Row'
 import { Link } from "react-router-dom";
 import axios from 'axios';
-//import {notification} from '../util'
+import {host} from '../util'
 
 class Tests extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Tests extends Component {
   }
   componentDidMount(){
     //notification("Tests Screen");
-    axios.get(`http://localhost:5000/query?type=getTests`)
+    axios.get(host + `/query?type=getTests`)
       .then(res => {
         const tests = res.data;
         this.setState({ tests });
@@ -30,7 +30,7 @@ class Tests extends Component {
     let userId;
     let token = localStorage.getItem('token');
     if(token){
-      axios.post('http://localhost:5000/verifyToken',{token})
+      axios.post(host + '/verifyToken',{token})
       .then((response) => {
         //token verified
         userId = response.data.id;
@@ -40,7 +40,7 @@ class Tests extends Component {
 
     //todo fix this
     let score = (userId,testId) => {
-    axios.get('http://localhost:5000/getHighestScore?testId=' + testId +'&userId=' + userId)
+    axios.get(host + '/getHighestScore?testId=' + testId +'&userId=' + userId)
     .then(score => {
       if(score.data){
         return (

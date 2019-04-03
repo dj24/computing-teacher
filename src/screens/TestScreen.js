@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FadingScreen from '../components/FadingScreen';
 import Test from '../components/Test'
 import axios from 'axios';
-//import {notification} from '../util'
+import {host} from '../util'
 
 class TestScreen extends Component {
 
@@ -12,7 +12,7 @@ class TestScreen extends Component {
 
   componentDidMount(){
     let id = this.props.match.params.id;
-    let queryString = 'http://localhost:5000/query?type=getTests&criteria={"_id":"' + id +'"}';
+    let queryString = host + '/query?type=getTests&criteria={"_id":"' + id +'"}';
     axios.get(queryString)
     .then((res) => {
       if(res.data){

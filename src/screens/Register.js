@@ -5,6 +5,7 @@ import Row from '../components/Row'
 import Button from '../components/Button'
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import {host} from '../util';
 
 class Register extends Component {
 
@@ -34,11 +35,12 @@ class Register extends Component {
           Swal.fire('Error', "Please ensure you are using a uea email address", 'error');
         }
         else{
-          axios.post('http://localhost:5000/register', payload)
+          axios.post(host + '/register', payload)
           .then(function (response) {
             Swal.fire('Success', "Please confirm your account by clicking the link we sent to " + username + ".", 'success');
           })
           .catch(function (error) {
+            console.log(error);
               Swal.fire('Error', error.response.data , 'error');
           });
         }

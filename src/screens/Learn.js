@@ -15,13 +15,7 @@ class Learn extends Component {
     this.toggleTest = this.toggleTest.bind(this);
   }
   componentDidMount(){
-    /*
-    axios.get(`http://localhost:5000/query?type=getTests`)
-      .then(res => {
-        const tests = res.data;
-        this.setState({ tests });
-      })
-      */
+  
   }
   toggleTest(){
     this.setState({showTest:!this.state.showTest});

@@ -5,6 +5,7 @@ import {Doughnut} from 'react-chartjs-2';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import {host} from '../util';
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -111,14 +112,14 @@ class Test extends Component {
 
     let token = localStorage.getItem('token');
     if(token){
-      axios.post('http://localhost:5000/verifyToken',{token})
+      axios.post(host + '/verifyToken',{token})
       .then((response) => {
         let payload = {
           testID : this.props.test._id,
           userID : response.data.id,
           result: score
         }
-        axios.post('http://localhost:5000/query?type=addTestLog', payload)
+        axios.post(host + '/query?type=addTestLog', payload)
         .then(function (response) {
           console.log(response);
           Swal.fire('Well Done!', 'You completed the test, scoring ' + Math.round(score*100) + '%', 'success')

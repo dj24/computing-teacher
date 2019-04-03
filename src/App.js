@@ -13,9 +13,8 @@ import Navbar from './components/Navbar'
 import Drawer from './components/Drawer'
 import Admin from './screens/Admin'
 import Register from './screens/Register'
-import {notification} from './util'
+import {notification,host} from './util'
 
-let host = 'http://localhost:5000';
 
 class App extends Component {
   constructor(props) {
@@ -47,7 +46,7 @@ class App extends Component {
   componentDidMount(){
     let token = localStorage.getItem('token');
     if(token){
-      axios.post('http://localhost:5000/verifyToken',{token})
+      axios.post(host + '/verifyToken',{token})
       .then((response) => {
         //token verified
         this.open();
@@ -68,7 +67,7 @@ class App extends Component {
       username : this.state.user,
       password : this.state.password,
     }
-    axios.post('http://localhost:5000/login',payload)
+    axios.post(host + '/login',payload)
     .then((response) => {
       //login sucesss
       this.open();

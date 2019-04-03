@@ -15,7 +15,7 @@ class Login extends Component {
               <Row><Input onChange={this.props.onChange} placeholder="Email"/></Row>
               <Row><Input onChange={this.props.onPassChange} placeholder="Password" secure="true"/></Row>
               <Row><a className={"link forgot"}>Forgot password?</a></Row>
-              <Button icon={'sign-in-alt'} onClick={this.props.onClick.bind(this)}>
+              <Button icon={'sign-in-alt' } onClick={this.props.onClick.bind(this)}>
                 Login
               </Button>
               <a class="link" onClick={this.props.showRegister}>Register</a>
