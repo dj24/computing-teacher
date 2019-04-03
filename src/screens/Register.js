@@ -41,7 +41,13 @@ class Register extends Component {
           })
           .catch(function (error) {
             console.log(error);
+            if(error.response.data){
               Swal.fire('Error', error.response.data , 'error');
+            }
+            else{
+              Swal.fire('Error', 'Network Error', 'error');
+            }
+
           });
         }
       }
