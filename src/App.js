@@ -95,7 +95,7 @@ class App extends Component {
 
   router = () => {
     if(this.state.loggedIn){
-      return (<div class='col main'>
+      return (<div className='col main'>
         <Navbar/>
         <Route exact path="/" component={Dashboard} />
         <Route path="/tests" component={Tests} />

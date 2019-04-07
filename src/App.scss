@@ -446,3 +446,35 @@ button{
     font-size:12px;
   }
 }
+
+.answers{
+  .input-group:not(:last-of-type){
+    margin-bottom:16px;
+  }
+}
+
+#tests{
+  .card{
+    margin:0;
+  }
+}
+
+.admin-header{
+  .input-group{
+    width:50%;
+    &:not(:last-of-type){
+      padding-right:16px;
+    }
+  }
+}
+.question-box,.type-group{
+  margin-bottom:16px;
+}
+
+.helper{
+  cursor: pointer;
+  font-weight: bold;
+}
+b{
+  font-weight:800;
+}

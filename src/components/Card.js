@@ -10,7 +10,7 @@ class Card extends Component {
     let header;
 
     if(this.props.title){
-      header = <div class="card-header">{this.props.title}</div>
+      header = <div className="card-header">{this.props.title}</div>
     }
 
     return (
@@ -28,7 +28,7 @@ class Card extends Component {
       >
         <div className={"card"}>
           {header}
-          <div class="card-body">
+          <div className="card-body">
               {this.props.children}
           </div>
         </div>
@@ -61,10 +61,10 @@ class LargeCard extends Card {
 class ImageCard extends Component {
   render() {
     return (
-      <div class="col-4 card-container">
-        <div class="card image-card">
-          <div class="card-img-top" style={{backgroundImage: 'url(' + this.props.src +')'}}></div>
-          <div class="card-body">
+      <div className="col-4 card-container">
+        <div className="card image-card">
+          <div className="card-img-top" style={{backgroundImage: 'url(' + this.props.src +')'}}></div>
+          <div className="card-body">
             {this.props.children}
           </div>
         </div>

@@ -11,18 +11,18 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <ul class="navbar-nav">
-          <li class="nav-item menu-icon">
-              <a class="nav-link" ><i class="material-icons">menu</i></a>
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <ul className="navbar-nav">
+          <li className="nav-item menu-icon">
+              <a className="nav-link" ><i className="material-icons">menu</i></a>
           </li>
-            <li class="nav-item search-container">
-                <i class="material-icons nav-icon-static">search</i>
-                <input placeholder="SEARCH" class="search"></input>
+            <li className="nav-item search-container">
+                <i className="material-icons nav-icon-static">search</i>
+                <input placeholder="SEARCH" className="search"></input>
             </li>
-            <li class="nav-item flex">
-                <a class="nav-link"><i class="material-icons">notifications</i></a>
-                <a onClick={logout} class="nav-link"><i class="material-icons">arrow_right_alt</i></a>
+            <li className="nav-item flex">
+                <a className="nav-link"><i className="material-icons">notifications</i></a>
+                <a onClick={logout} className="nav-link"><i className="material-icons">arrow_right_alt</i></a>
             </li>
         </ul>
       </nav>

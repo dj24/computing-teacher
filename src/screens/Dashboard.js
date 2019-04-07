@@ -86,7 +86,7 @@ class Dashboard extends Component {
         <Row>
           <LargeCard delay={delay}>
             <Row className={'inner'}>
-              <div class="col level">
+              <div className="col level">
                 <Doughnut
                   data={pie_data}
                   height={277}
@@ -99,7 +99,7 @@ class Dashboard extends Component {
                   }}/>
                 <h1>Level 1</h1>
               </div>
-              <div class="col">
+              <div className="col">
                 <Heading>Progress</Heading>
                 <SubHeading>
                   Youre 150 XP from reaching Level 2

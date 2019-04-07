@@ -68,7 +68,7 @@ class Register extends Component {
                 <Button icon={'sign-in-alt'} onClick={this.register.bind(this)}>
                   Register
                 </Button>
-                <a onClick={this.props.hideRegister} class="link">Login</a>
+                <a onClick={this.props.hideRegister} className="link">Login</a>
               </form>
           </SmallCard>
       </Overlay>

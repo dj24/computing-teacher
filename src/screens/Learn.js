@@ -15,7 +15,7 @@ class Learn extends Component {
     this.toggleTest = this.toggleTest.bind(this);
   }
   componentDidMount(){
-  
+
   }
   toggleTest(){
     this.setState({showTest:!this.state.showTest});
@@ -41,10 +41,10 @@ class Learn extends Component {
 
 
       <Row style={screenStyle}>
-        <div class="col-12"><Heading animated='true'>Learn</Heading></div>
+        <div className="col-12"><Heading animated='true'>Learn</Heading></div>
         { this.state.lessons.map((test,i) =>
           <ImageCard className={'learn-card'} src={'https://images.pexels.com/photos/825258/pexels-photo-825258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'}>
-            <a ><h3>Lesson Title</h3></a>
+            <a ><h3>Section Title</h3></a>
             <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div style={{display:'flex',alignItems:'center'}} className={'bottom'}>
               <ProgressBar width={50}/>

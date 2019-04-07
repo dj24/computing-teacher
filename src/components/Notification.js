@@ -40,7 +40,7 @@ class Notification extends Component {
     */
 
     return(
-      <div class="notifications">
+      <div className="notifications">
       </div>
     )
   }

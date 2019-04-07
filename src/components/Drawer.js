@@ -11,7 +11,7 @@ class Drawer extends Component {
     let drawerItems;
     if(this.props.admin){
       drawerItems =
-      <ul class="list-group">
+      <ul className="list-group">
         <li style={{
           textAlign: 'center',
           borderRight: '1px solid rgba(0,0,0,0.05)',
@@ -29,7 +29,7 @@ class Drawer extends Component {
     }
     else{
       drawerItems =
-      <ul class="list-group">
+      <ul className="list-group">
         <li style={{
           textAlign: 'center',
           borderRight: '1px solid rgba(0,0,0,0.05)',

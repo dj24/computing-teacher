@@ -53,7 +53,16 @@ class Tests extends Component {
     });
   }
 
-
+  let tests;
+  if(tests){
+    tests = this.state.tests.map((test,i) => (
+      <SmallCard key={i} delay={0} title={test.title}>
+        <p>Test</p>
+        <Link className={'btn'} to={'test/' + test._id}>Start</Link>
+        {score(userId,test._id)}
+      </SmallCard>
+    ))
+  }
 
 /*
 
@@ -64,13 +73,7 @@ class Tests extends Component {
 
       <Heading animated='true'>Tests</Heading>
       <Row>
-        { this.state.tests.map((test,i) =>
-          <SmallCard key={i} delay={0} title={test.title}>
-            <p>Test</p>
-            <Link className={'btn'} to={'test/' + test._id}>Start</Link>
-            {score(userId,test._id)}
-          </SmallCard>
-        )}
+        {tests }
       </Row>
 
       </FadingScreen>

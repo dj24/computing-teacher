@@ -187,7 +187,7 @@ class Test extends Component {
           <div style={cardStyle} className={"card"}>
             <div>
             <Row>
-              <div class="col test-graph">
+              <div className="col test-graph">
                 <Doughnut
                   data={pie_data}
                   width={150}
@@ -199,7 +199,7 @@ class Test extends Component {
                     }
                   }}/>
               </div>
-              <div class="col">
+              <div className="col">
                 <SubHeading>QUESTION {current} OF {total}</SubHeading>
                 {title}
               </div>
@@ -212,7 +212,7 @@ class Test extends Component {
               <button onClick={this.prevQuestion}>Prev</button>
               {nextBtn}
               <Link to="/tests">
-                <i class="material-icons">close</i>
+                <i className="material-icons">close</i>
               </Link>
             </Row>
 

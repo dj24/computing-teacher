@@ -14,8 +14,8 @@ class ProgressBar extends Component {
 
   render() {
     return (
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style={{width: this.state.width}}></div>
+      <div className="progress">
+        <div className="progress-bar" role="progressbar" style={{width: this.state.width}}></div>
       </div>
 
     );

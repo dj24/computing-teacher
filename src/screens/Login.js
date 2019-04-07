@@ -18,7 +18,7 @@ class Login extends Component {
               <Button icon={'sign-in-alt' } onClick={this.props.onClick.bind(this)}>
                 Login
               </Button>
-              <a class="link" onClick={this.props.showRegister}>Register</a>
+              <a className="link" onClick={this.props.showRegister}>Register</a>
           </SmallCard>
       </Overlay>
     );
