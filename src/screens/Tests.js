@@ -21,7 +21,6 @@ class Tests extends Component {
       .then(res => {
         const tests = res.data;
         this.setState({ tests });
-
       })
   }
 
@@ -54,7 +53,7 @@ class Tests extends Component {
   }
 
   let tests;
-  if(tests){
+  if(this.state.tests){
     tests = this.state.tests.map((test,i) => (
       <SmallCard key={i} delay={0} title={test.title}>
         <p>Test</p>

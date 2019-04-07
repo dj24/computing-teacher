@@ -73,19 +73,22 @@ class Test extends Component {
     };
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
+    this.inputChange = this.inputChange.bind(this);
   }
 
   componentDidMount(){
     let answers = shuffle(this.state.answers);
     this.setState(answers);
-    console.log(this.props.test._id);
     this.setState({totalQuestions:this.props.test.questions.length});
   }
 
   nextQuestion(){
+
     if(this.state.currentQuestion < this.state.totalQuestions - 1){
       this.setState({currentQuestion:this.state.currentQuestion + 1});
     }
+  let input =  document.getElementById("answerInput").value = '';
+  console.log(input);
   }
   prevQuestion(){
     if(this.state.currentQuestion > 0){
@@ -95,7 +98,13 @@ class Test extends Component {
 
   selectAnswer = (answer) =>{
     let answers = this.state.answers;
-    answers[this.state.currentQuestion] = answer;
+    answers[this.state.currentQuestion] = answers;
+    this.setState({answers});
+  }
+
+  inputChange(e){
+    let answers = this.state.answers;
+    answers[this.state.currentQuestion] = e.target.value;
     this.setState({answers});
   }
 
@@ -158,13 +167,14 @@ class Test extends Component {
     let answers;
     let title;
     let choices;
+    let input;
     if(this.props.test){
       questions = this.props.test.questions;
       currentQuestion = questions[this.state.currentQuestion];
       answers = currentQuestion.wrong_answers.concat(currentQuestion.correct_answer);
 
       title = <Heading>{currentQuestion.question}</Heading>
-
+      input = <input onChange={this.inputChange} id="answerInput" value={this.state.value}></input>
       choices = answers.map((answer,i) =>
         <Choice onSelect={this.selectAnswer} select={this.state.answers[this.state.currentQuestion] === answer} key={i}>
           {answer}
@@ -204,7 +214,7 @@ class Test extends Component {
                 {title}
               </div>
             </Row>
-              {choices}
+              {this.props.test.questions[this.state.currentQuestion].type === 'multiple' ? choices : input}
             <Row style={{
               display: 'flex',
               justifyContent: 'space-around',

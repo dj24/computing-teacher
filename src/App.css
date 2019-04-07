@@ -359,3 +359,14 @@ button {
 
 b {
   font-weight: 800; }
+
+#answerInput {
+  width: calc(100% - 40px);
+  margin: 20px;
+  font-weight: 800;
+  padding: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.25); }

@@ -113,15 +113,26 @@ class Admin extends Component {
     for(let i  = 0; i < forms.length;i++){
       let inputs = forms[i].getElementsByTagName("input");
       let correct_answer = inputs[0].value;
-      let wrong_answers = [inputs[1].value,inputs[2].value];
+
       let question = forms[i].getElementsByTagName("textarea")[0].value;
       let type = forms[i].getElementsByTagName("select")[0].value;
-      questions.push({
-        correct_answer,
-        wrong_answers,
-        question,
-        type
-      })
+      if(inputs[1]){
+        let wrong_answers = [inputs[1].value,inputs[2].value];
+        questions.push({
+          correct_answer,
+          wrong_answers,
+          question,
+          type
+        })
+      }
+      else{
+        questions.push({
+          correct_answer,
+          question,
+          type
+        })
+      }
+
     }
     let title = document.getElementById("test_title").value;
     let section = document.getElementById("section").value;
