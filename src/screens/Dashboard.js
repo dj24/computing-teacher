@@ -3,6 +3,7 @@ import {Doughnut} from 'react-chartjs-2';
 import {MediumCard,LargeCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
 import Heading, {SubHeading} from '../components/Heading'
+import Activity from '../components/Activity'
 import Row from '../components/Row'
 import {notification} from '../util'
 //import axios from 'axios';
@@ -108,8 +109,12 @@ class Dashboard extends Component {
             </Row>
           </LargeCard>
 
+          <MediumCard title="Your Activity">
+            <Activity/>
+          </MediumCard>
+          {/* BROKEN COMPONENT
           <MediumCard title="Graph" delay={delay*2}>
-            {/* BROKEN COMPONENT
+
             <Line
               data={data}
               height={300}
@@ -125,8 +130,9 @@ class Dashboard extends Component {
                }
               }}
             />
-            */}
+
           </MediumCard>
+          */}
         </Row>
 
         <Row>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import DrawerItem from '../components/DrawerItem'
 import Logo from'../img/logo.png';
 
+
+
 class Drawer extends Component {
 
 
@@ -45,7 +47,7 @@ class Drawer extends Component {
     }
 
     return (
-      <div className={'drawer ' + (this.props.blur ? '' : 'blur')}>
+      <div id="drawer" className={'drawer ' + (this.props.blur ? '' : 'blur')}>
         {drawerItems}
       </div>
     );

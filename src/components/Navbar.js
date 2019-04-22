@@ -7,6 +7,16 @@ function logout(){
   //notification("Logged out")
 }
 
+function showMenu(){
+  var element = document.getElementById("drawer");
+  if(element.classList.contains("active")){
+    element.classList.remove("active");
+  }
+  else{
+    element.classList.add("active");
+  }
+}
+
 class Navbar extends Component {
 
   render() {
@@ -14,7 +24,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-lg navbar-light">
         <ul className="navbar-nav">
           <li className="nav-item menu-icon">
-              <a className="nav-link" ><i className="material-icons">menu</i></a>
+              <a onClick={showMenu} className="nav-link" ><i className="material-icons">menu</i></a>
           </li>
             <li className="nav-item search-container">
                 <i className="material-icons nav-icon-static">search</i>

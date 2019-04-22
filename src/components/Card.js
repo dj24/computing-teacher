@@ -55,13 +55,13 @@ class MediumCard extends Card {
 }
 
 class LargeCard extends Card {
-  
+
 }
 
 class ImageCard extends Component {
   render() {
     return (
-      <div className="col-4 card-container">
+      <div className="col-xl-4 col-lg-6 col-12 card-container">
         <div className="card image-card">
           <div className="card-img-top" style={{backgroundImage: 'url(' + this.props.src +')'}}></div>
           <div className="card-body">

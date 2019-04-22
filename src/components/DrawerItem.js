@@ -2,6 +2,11 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+function hideMenu(){
+  var element = document.getElementById("drawer");
+  element.classList.remove("active");
+}
+
 class DrawerItem extends Component {
 
 
@@ -13,7 +18,7 @@ class DrawerItem extends Component {
     return (
       <li className={"list-group-item " + (this.props.link === current_path ? 'active' : '')}>
         <div></div>
-        <Link className="nav-link" to={this.props.link}>
+        <Link onClick={hideMenu} className="nav-link" to={this.props.link}>
           <i className="material-icons drawer-icon">{this.props.icon}</i>
           {this.props.label}
         </Link>

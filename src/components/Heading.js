@@ -13,9 +13,7 @@ class Heading extends Component {
 class SubHeading extends Heading {
   render() {
     return (
-      <div className='heading'>
         <h2>{this.props.children}</h2>
-      </div>
     );
   }
 }
