@@ -8,24 +8,17 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import {host} from '../util'
 
-class Tests extends Component {
+class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tests:[]
+      score : "",
+      id: "",
     };
   }
+
   componentDidMount(){
-    //notification("Tests Screen");
-    axios.get(host + `/query?type=getTests`)
-      .then(res => {
-        const tests = res.data;
-        this.setState({ tests });
-      })
-  }
 
-
-  render() {
     let userId;
     let token = localStorage.getItem('token');
     if(token){
@@ -35,31 +28,80 @@ class Tests extends Component {
         userId = response.data.id;
       })
     }
-
-
-    //todo fix this
-    let score = (userId,testId) => {
-    axios.get(host + '/getHighestScore?testId=' + testId +'&userId=' + userId)
+    //notification("Tests Screen");
+    axios.get(host + '/getHighestScore?testId=' + this.state.id +'&userId=' + userId)
     .then(score => {
       if(score.data){
-        return (
-          <div>
-          <h5>Last Attempt : {score.data}%</h5>
-          <ProgressBar className={'bottom'} width={score.data}/>
-          </div>
-        );
+        //console.log(score);
+        this.setState({score:score.data});
       }
     });
   }
 
+  render(){
+    return(
+      <SmallCard id={this.props.id} delay={0} title={this.props.title}>
+        <p>Test</p>
+        <Link className={'btn'} to={'/test/' + this.props.id}>Start</Link>
+        <div style={{display:'flex',alignItems:'center'}} className={'bottom'}>
+          <ProgressBar width={this.state.score}/>
+          <h5 className="animated fadeIn" style={{padding:0}}>{Math.round(this.state.score)}%</h5>
+        </div>
+      </SmallCard>
+    )
+
+  }
+
+}
+
+class Tests extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tests:[]
+    };
+  }
+  componentDidMount(){
+    //notification("Tests Screen");
+    let sectionId = this.props.match.params.id;
+    axios.get(host + '/query?type=getSections&criteria={"_id":"' + sectionId +'"}')
+      .then(res => {
+        if(res.data.length>0){
+          let name = res.data[0].name;
+          this.setState({section:name});
+          axios.get(host + '/query?type=getTests&criteria={"section":"' + name +'"}')
+          .then(res => {
+            const tests = res.data;
+            console.log(tests);
+            this.setState({ tests });
+          })
+        }
+        else{
+          axios.get(host + '/query?type=getTests')
+          .then(res => {
+            const tests = res.data;
+            this.setState({ tests });
+          })
+        }
+
+
+      })
+
+  }
+
+
+  render() {
+
+
+
   let tests;
   if(this.state.tests){
     tests = this.state.tests.map((test,i) => (
-      <SmallCard key={i} delay={0} title={test.title}>
-        <p>Test</p>
-        <Link className={'btn'} to={'test/' + test._id}>Start</Link>
-        {score(userId,test._id)}
-      </SmallCard>
+      <Test
+        key={i}
+        title={test.title}
+        id={test._id}
+      />
     ))
   }
 
@@ -70,7 +112,7 @@ class Tests extends Component {
     return (
       <FadingScreen>
 
-      <Heading animated='true'>Tests</Heading>
+      <Heading animated='true'>{this.state.section} Tests</Heading>
       <Row>
         {tests }
       </Row>

@@ -5,7 +5,7 @@ import './Loader.css';
 import 'hover.css/css/hover.css'
 import axios from 'axios'
 import Login from './screens/Login'
-import Learn from './screens/Learn'
+import Sections from './screens/Sections'
 import Tests from './screens/Tests'
 import TestScreen from './screens/TestScreen'
 import Dashboard from './screens/Dashboard'
@@ -37,7 +37,7 @@ class App extends Component {
     let queryString = host + '/query?type=isAdmin&criteria={"username":"' + this.state.user +'"}'
     axios.get(queryString)
     .then((admin) => {
-      if(admin){
+      if(admin.data){
         this.setState({admin:true});
       }
     })
@@ -70,9 +70,9 @@ class App extends Component {
     axios.post(host + '/login',payload)
     .then((response) => {
       //login sucesss
-      this.open();
+
       localStorage.setItem('token', response.data.token);
-      notification("Logged in successfuly");
+      this.open();
     })
     .catch((error) => {
       //login failure
@@ -98,9 +98,9 @@ class App extends Component {
       return (<div className='col main'>
         <Navbar/>
         <Route exact path="/" component={Dashboard} />
-        <Route path="/tests" component={Tests} />
+        <Route path="/tests/:id" component={Tests} />
         <Route path="/test/:id" component={TestScreen} />
-        <Route path="/learn" component={Learn} />
+        <Route path="/sections" component={Sections} />
         <Route path="/admin" component={Admin} />
       </div>)
     }

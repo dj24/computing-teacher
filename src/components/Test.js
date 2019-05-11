@@ -83,12 +83,12 @@ class Test extends Component {
   }
 
   nextQuestion(){
-
     if(this.state.currentQuestion < this.state.totalQuestions - 1){
       this.setState({currentQuestion:this.state.currentQuestion + 1});
     }
-  let input =  document.getElementById("answerInput").value = '';
-  console.log(input);
+    if(  document.getElementById("answerInput")){
+      document.getElementById("answerInput").value = '';
+    }
   }
   prevQuestion(){
     if(this.state.currentQuestion > 0){
@@ -168,11 +168,14 @@ class Test extends Component {
     let title;
     let choices;
     let input;
+    let imageSrc;
     if(this.props.test){
       questions = this.props.test.questions;
       currentQuestion = questions[this.state.currentQuestion];
       answers = currentQuestion.wrong_answers.concat(currentQuestion.correct_answer);
-
+      if(currentQuestion.image){
+        imageSrc = currentQuestion.image;
+      }
       title = <Heading>{currentQuestion.question}</Heading>
       input = <input onChange={this.inputChange} id="answerInput" value={this.state.value}></input>
       choices = answers.map((answer,i) =>
@@ -190,6 +193,18 @@ class Test extends Component {
     }
     else{
       nextBtn = <button onClick={this.nextQuestion}>Next</button>
+    }
+
+    let image;
+    if(imageSrc){
+      image = <img style={{
+        maxWidth:"100%",
+        display:"block",
+        maxHeight:"30vh",
+        width:"auto",
+        height:"auto",
+        margin:"auto",
+      }} src={imageSrc}/>
     }
 
     return (
@@ -214,6 +229,10 @@ class Test extends Component {
                 {title}
               </div>
             </Row>
+            <Row>
+              {image}
+            </Row>
+
               {this.props.test.questions[this.state.currentQuestion].type === 'multiple' ? choices : input}
             <Row style={{
               display: 'flex',
@@ -221,7 +240,7 @@ class Test extends Component {
             }}>
               <button onClick={this.prevQuestion}>Prev</button>
               {nextBtn}
-              <Link to="/tests">
+              <Link to="/sections">
                 <i className="material-icons">close</i>
               </Link>
             </Row>

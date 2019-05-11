@@ -10,7 +10,7 @@ $light: #A4A9B2;
 $heading: rgba(0,0,0,0.6);
 $p: rgba(0,0,0,0.4);
 $bg: rgba(0,0,0,0.05);
-$margin: 1.5vw;
+$margin: 20px;
 $break-medium: 960px;
 
 
@@ -130,6 +130,9 @@ hr{
   box-shadow: $shadow;
   border:0;
   margin:$margin*2;
+  @media(max-width: 992px){
+    margin:$margin/2;
+  }
   padding:0;
   border-radius: $margin/2;
   background: white;
@@ -301,6 +304,16 @@ nav{
 
 .nav-link{
   padding: 0;
+  cursor: pointer;
+  line-height: 35px;
+}
+
+.account-circle{
+  background: rgba(0,0,0,0.15);
+  border-radius: 50%;
+  line-height: 35px;
+  color: #fff !important;
+  margin-right:10px;
 }
 
 .nav-icon{
@@ -499,4 +512,48 @@ b{
   color:rgba(0, 0, 0, 0.6);
   background: none;
   border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.activity{
+  height:300px;
+  max-height: 300px;
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0;
+  li{
+    display: flex;
+    justify-content: space-between;
+    i{
+      font-size:40px;
+      color:rgba(0,0,0,0.15);
+      &.small{
+        font-size:24px;
+        margin-right:8px;
+      }
+    }
+    border:1px solid rgba(0,0,0,0.15);
+    .faint{
+      opacity:0.5;
+      font-style: italic;
+    }
+    border-radius: 4px;
+    margin:10px 10px 10px 0;
+    padding:10px;
+    &:first-child{
+      margin-top:0;
+    }
+  }
+}
+
+.card-loader{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  height:315px;
+}
+
+.next-level{
+  display: flex;
+    align-items: center;
+    justify-content: center;
 }

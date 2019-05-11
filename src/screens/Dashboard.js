@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import {Doughnut} from 'react-chartjs-2';
-import {MediumCard,LargeCard} from '../components/Card'
+import {SmallCard,MediumCard,MediumLargeCard,LargeCard} from '../components/Card'
 import FadingScreen from '../components/FadingScreen'
 import Heading, {SubHeading} from '../components/Heading'
 import Activity from '../components/Activity'
 import Row from '../components/Row'
-import {notification} from '../util'
-//import axios from 'axios';
+import XpGraph from '../components/XpGraph'
+import {notification,getId,host} from '../util'
+import LevelProgress from '../components/LevelProgress'
+import axios from 'axios';
+import Badges from '../components/Badges';
 
 
 class Dashboard extends Component {
@@ -14,11 +16,25 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       active:false,
+      user:{}
     };
   }
 
   componentDidMount(){
-    notification("Dashboard Screen",true);
+    getId().then((id) =>{
+      axios.get(host + '/query?type=getUser&criteria={"_id":"' + id +'"}')
+      .then((response) => {
+        this.setState({user :
+          {
+            firstname : response.data.firstname,
+            lastname : response.data.lastname
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    });
   }
 
   componentWillUnmount() {
@@ -26,113 +42,39 @@ class Dashboard extends Component {
   }
 
   render() {
-      let pie_data = {
-        datasets: [{
-          data : [350, 500],
-          borderWidth: 0,
-          backgroundColor: [
-            'rgba(255,0,0,0.5)',
-            'rgba(0,0,0,0.1)'
-          ]
-        }]
-      }
-/*
-      function addDate(days){
-        let date = new Date();
-        date.setDate(date.getDate() + days);
-        return date;
-      }
-
-        let data = {
-            datasets: [{
-                label: 'XP',
-                data: [{
-                    x: new Date(),
-                    y: 1
-                }, {
-                    t: addDate(6),
-                    y: 10
-                },
-                {
-                    t: addDate(10),
-                    y: 12
-                }],
-                borderColor:'rgba(255,99,132,1)',
-                backgroundColor:'rgba(255,99,132,1)',
-                fill: false
-            },
-            {
-                label: 'Class Average',
-                data: [{
-                    x: new Date(),
-                    y: 2
-                }, {
-                    t: addDate(3),
-                    y: 8
-                },
-                {
-                    t: addDate(9),
-                    y: 14
-                }],
-                borderColor:'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(54, 162, 235, 1)',
-                fill:false
-            }]
-        }
-*/
-        let delay = 200;
+    let greeting;
+    let now = new Date().getHours();
+    if(now > 18){
+      greeting = "Good evening ";
+    }
+    else if(now > 12){
+      greeting = "Good afternoon ";
+    }
+    else{
+      greeting = "Good morning ";
+    }
 
     return (
       <FadingScreen>
         <Row>
-          <LargeCard delay={delay}>
-            <Row className={'inner'}>
-              <div className="col level">
-                <Doughnut
-                  data={pie_data}
-                  height={277}
-                  options={{
-                    cutoutPercentage : 80,
-                    maintainAspectRatio: false,
-                    tooltips: {
-                      enabled: false
-                    }
-                  }}/>
-                <h1>Level 1</h1>
-              </div>
-              <div className="col">
-                <Heading>Progress</Heading>
-                <SubHeading>
-                  Youre 150 XP from reaching Level 2
-                </SubHeading>
-              </div>
-            </Row>
-          </LargeCard>
+          <Heading>{this.state.user.firstname ? greeting + this.state.user.firstname : ''} </Heading>
+        </Row>
+        <Row>
+        <MediumCard title="Next Level">
+          <LevelProgress/>
+        </MediumCard>
+          <MediumCard title="Your Progress">
+            <XpGraph/>
+          </MediumCard>
 
-          <MediumCard title="Your Activity">
+
+          <SmallCard title="Your Activity">
             <Activity/>
-          </MediumCard>
-          {/* BROKEN COMPONENT
-          <MediumCard title="Graph" delay={delay*2}>
+          </SmallCard>
+          <MediumLargeCard title="Your Progress">
+            <Badges/>
+          </MediumLargeCard>
 
-            <Line
-              data={data}
-              height={300}
-              options={{
-                maintainAspectRatio: false,
-                scales: {
-                   xAxes: [{
-                       type: 'time',
-                       time: {
-                           unit: 'month'
-                       }
-                   }]
-               }
-              }}
-            />
-
-          </MediumCard>
-          */}
         </Row>
 
         <Row>

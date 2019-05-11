@@ -54,6 +54,14 @@ class MediumCard extends Card {
   }
 }
 
+class MediumLargeCard extends Card {
+  constructor(props){
+    super(props);
+    this.size = 8;
+    this.mediumsize = 12;
+  }
+}
+
 class LargeCard extends Card {
 
 }
@@ -77,4 +85,4 @@ class ImageCard extends Component {
 
 
 export default Card;
-export {SmallCard,MediumCard,LargeCard,ImageCard};
+export {SmallCard,MediumCard,MediumLargeCard,LargeCard,ImageCard};

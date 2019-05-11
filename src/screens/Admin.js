@@ -13,8 +13,12 @@ import { PulseLoader } from 'react-spinners';
 class Question extends Component {
   constructor(props) {
     super(props);
-    this.state = {type: 'multiple'};
+    this.state = {
+      type: 'multiple',
+      image : ""
+    };
     this.handleChange = this.handleChange.bind(this);
+    this.handleFileSelect = this.handleFileSelect.bind(this);
   }
 
   handleChange(event) {
@@ -27,6 +31,21 @@ class Question extends Component {
     <b>Exact match:</b> Exact answer must be entered<br> \
     <b>Margin for error:</b> Answers are allowed with a margin for error (likeness above 94%, common spelling mistakes are allowed)";
     Swal.fire('Question Type',message,'info');
+  }
+
+  handleFileSelect(evt) {
+      var file = evt.target.files[0];
+      console.log(file);
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload =  () => {
+        let base64 = reader.result;
+        console.log(base64);
+        this.setState({image:base64});
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
   }
 
   render() {
@@ -70,6 +89,16 @@ class Question extends Component {
         </div>
       {answers}
 
+      <div class="form-group mt-3">
+        <label for="fileSelect">Image to show on question (Optional)</label>
+        <input onChange={this.handleFileSelect} type="file" class="form-control-file" id="fileSelect"/>
+        <img
+          className="ImagePreview"
+          style={{maxWidth:400,marginTop:10}}
+          src={this.state.image}
+        />
+      </div>
+
       </form>
       </LargeCard>
       </FadingScreen>
@@ -78,6 +107,8 @@ class Question extends Component {
 }
 
 class Admin extends Component {
+
+
   constructor(props){
     super(props);
     this.state = {
@@ -107,6 +138,7 @@ class Admin extends Component {
     })
   }
 
+
   addTest(){
     let forms = document.forms;
     let questions = [];
@@ -116,20 +148,24 @@ class Admin extends Component {
 
       let question = forms[i].getElementsByTagName("textarea")[0].value;
       let type = forms[i].getElementsByTagName("select")[0].value;
-      if(inputs[1]){
+      let image = forms[i].getElementsByClassName("ImagePreview")[0].src;
+
+      if(inputs[1] && inputs[2]){
         let wrong_answers = [inputs[1].value,inputs[2].value];
         questions.push({
           correct_answer,
           wrong_answers,
           question,
-          type
+          type,
+          image
         })
       }
       else{
         questions.push({
           correct_answer,
           question,
-          type
+          type,
+          image
         })
       }
 

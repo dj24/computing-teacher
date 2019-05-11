@@ -10,7 +10,7 @@ a, a:hover {
 
 .col {
   padding: 0;
-  margin: 1.5vw; }
+  margin: 20px; }
 
 .col.test-graph {
   flex: 0 0 0px; }
@@ -44,7 +44,7 @@ hr {
   background: rgba(0, 0, 0, 0.5); }
 
 .heading {
-  margin: 1.5vw; }
+  margin: 20px; }
   .heading h1 {
     color: rgba(0, 0, 0, 0.6); }
   .heading h2 {
@@ -56,8 +56,8 @@ hr {
   margin: auto; }
 
 .module {
-  margin: 1.5vw;
-  margin-top: 1.5vw; }
+  margin: 20px;
+  margin-top: 20px; }
 
 .main {
   margin: auto;
@@ -84,12 +84,15 @@ hr {
   transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
   border: 0;
-  margin: 3vw;
+  margin: 40px;
   padding: 0;
-  border-radius: 0.75vw;
+  border-radius: 10px;
   background: white; }
   .card a {
     text-decoration: none; }
+  @media (max-width: 992px) {
+    .card {
+      margin: 10px; } }
   .card:hover .card-img-top {
     filter: grayscale(0%);
     background-size: 125%; }
@@ -98,24 +101,24 @@ hr {
     text-transform: uppercase;
     font-weight: 600;
     color: #7DE522;
-    padding: 0.75vw 0;
-    margin: 1.5vw; }
+    padding: 10px 0;
+    margin: 20px; }
   .card .card-img-top {
     filter: grayscale(50%);
     transition: all 5s linear;
     height: 200px;
-    border-top-left-radius: 0.75vw;
-    border-top-right-radius: 0.75vw;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     background-position: center;
     background-size: 100%; }
   .card .card-body {
-    padding: 1.5vw;
+    padding: 20px;
     background: 0; }
     .card .card-body h2, .card .card-body h3, .card .card-body h4, .card .card-body h5, .card .card-body p, .card .card-body .bottom {
-      padding: 1vw 1.5vw;
+      padding: 13.33333px 20px;
       margin: 0; }
     .card .card-body .progress {
-      margin-right: 3vw;
+      margin-right: 40px;
       height: 8px;
       width: 100%; }
       .card .card-body .progress .progress-bar {
@@ -214,14 +217,23 @@ nav {
   colour: #A4A9B2; }
 
 .nav-link {
-  padding: 0; }
+  padding: 0;
+  cursor: pointer;
+  line-height: 35px; }
+
+.account-circle {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  line-height: 35px;
+  color: #fff !important;
+  margin-right: 10px; }
 
 .nav-icon {
   vertical-align: -webkit-baseline-middle;
-  margin: 0 1.5vw; }
+  margin: 0 20px; }
 
 .nav-icon-static {
-  margin-right: 1.5vw;
+  margin-right: 20px;
   color: rgba(0, 0, 0, 0.5); }
 
 .search {
@@ -239,7 +251,7 @@ nav {
   left: 5px; }
 
 .drawer-icon {
-  margin-right: 1.5vw; }
+  margin-right: 20px; }
 
 @keyframes fadeZoom {
   from,
@@ -279,10 +291,10 @@ nav {
   border: none;
   outline: none;
   border-bottom: 1px solid #A4A9B2;
-  margin: 1.5vw; }
+  margin: 20px; }
 
 .btn {
-  margin: 1.5vw;
+  margin: 20px;
   text-transform: uppercase;
   font-weight: bold;
   background: #7DE522;
@@ -379,3 +391,39 @@ b {
   color: rgba(0, 0, 0, 0.6);
   background: none;
   border: 1px solid rgba(0, 0, 0, 0.25); }
+
+.activity {
+  height: 300px;
+  max-height: 300px;
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0; }
+  .activity li {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin: 10px 10px 10px 0;
+    padding: 10px; }
+    .activity li i {
+      font-size: 40px;
+      color: rgba(0, 0, 0, 0.15); }
+      .activity li i.small {
+        font-size: 24px;
+        margin-right: 8px; }
+    .activity li .faint {
+      opacity: 0.5;
+      font-style: italic; }
+    .activity li:first-child {
+      margin-top: 0; }
+
+.card-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 315px; }
+
+.next-level {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
