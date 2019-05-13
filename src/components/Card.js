@@ -28,7 +28,9 @@ class Card extends Component {
       >
         <div className={"card"}>
           {header}
-          <div className="card-body">
+          <div className="card-body" style={{
+            padding : this.props.noPadding ? "0" : "auto"
+          }}>
               {this.props.children}
           </div>
         </div>
@@ -42,7 +44,7 @@ class SmallCard extends Card {
   constructor(props){
     super(props);
     this.size = 4;
-    this.mediumsize = 6;
+    this.mediumsize = 12;
   }
 }
 

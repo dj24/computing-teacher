@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {Heading, SubHeading} from '../components/Heading'
 import Row from '../components/Row'
 import {Doughnut} from 'react-chartjs-2';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import {host} from '../util';
+import {host,getId} from '../util';
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -70,13 +70,17 @@ class Test extends Component {
       questions: [],
       totalQuestions : 0,
       currentQuestion: 0,
+      complete:false
     };
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
     this.inputChange = this.inputChange.bind(this);
+    this.finishTest = this.finishTest.bind(this);
   }
 
   componentDidMount(){
+    getId().then(id => this.setState({id})).then(() => console.log(this.state.id));
+
     let answers = shuffle(this.state.answers);
     this.setState(answers);
     this.setState({totalQuestions:this.props.test.questions.length});
@@ -132,11 +136,32 @@ class Test extends Component {
         .then(function (response) {
           console.log(response);
           Swal.fire('Well Done!', 'You completed the test, scoring ' + Math.round(score*100) + '%', 'success')
+          .then(result => {
+            getId().then(userID => {
+              axios.post(host + '/query?type=checkAchievements', {userID})
+              .then(achievements=>{
+                console.log(achievements);
+                if(achievements.data.length > 0){
+                  let achievement = achievements.data[0]
+                  Swal.fire(achievement.name);
+                  Swal.fire({
+                    title: 'You earned a badge!',
+                    html: '<b>' + achievement.name + '</b> - ' + achievement.description,
+                    imageUrl: require("../img/badges/" + achievement.img),
+                    imageHeight: 200,
+                    imageAlt: 'Badge'
+                  })
+                }
+              })
+            })
+          });
+        })
+        .then(()=>{
+          this.setState({complete:true}).bind(this);
         })
         .catch(function (error) {
           console.log(error);
         });
-
       })
       .catch((error) => {
         console.log(error);
@@ -206,51 +231,56 @@ class Test extends Component {
         margin:"auto",
       }} src={imageSrc}/>
     }
+    if(this.state.complete){
+      return <Redirect to="/sections"/>
+    }
+    else{
+      return (
+          <div>
+            <div style={cardStyle} className={"card"}>
+              <div>
+              <Row>
+                <div className="col test-graph">
+                  <Doughnut
+                    data={pie_data}
+                    width={150}
+                    options={{
+                      cutoutPercentage : 90,
+                      maintainAspectRatio: false,
+                      tooltips: {
+                        enabled: false
+                      }
+                    }}/>
+                </div>
+                <div className="col">
+                  <SubHeading>QUESTION {current} OF {total}</SubHeading>
+                  {title}
+                </div>
+              </Row>
+              <Row>
+                {image}
+              </Row>
 
-    return (
-        <div>
-          <div style={cardStyle} className={"card"}>
-            <div>
-            <Row>
-              <div className="col test-graph">
-                <Doughnut
-                  data={pie_data}
-                  width={150}
-                  options={{
-                    cutoutPercentage : 90,
-                    maintainAspectRatio: false,
-                    tooltips: {
-                      enabled: false
-                    }
-                  }}/>
+                {this.props.test.questions[this.state.currentQuestion].type === 'multiple' ? choices : input}
+              <Row style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+              }}>
+                <button onClick={this.prevQuestion}>Prev</button>
+                {nextBtn}
+                <Link to="/sections">
+                  <i className="material-icons">close</i>
+                </Link>
+              </Row>
+
+
               </div>
-              <div className="col">
-                <SubHeading>QUESTION {current} OF {total}</SubHeading>
-                {title}
-              </div>
-            </Row>
-            <Row>
-              {image}
-            </Row>
-
-              {this.props.test.questions[this.state.currentQuestion].type === 'multiple' ? choices : input}
-            <Row style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-            }}>
-              <button onClick={this.prevQuestion}>Prev</button>
-              {nextBtn}
-              <Link to="/sections">
-                <i className="material-icons">close</i>
-              </Link>
-            </Row>
-
-
             </div>
           </div>
-        </div>
 
-    );
+      );
+    }
+
   }
 }
 

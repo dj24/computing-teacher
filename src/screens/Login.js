@@ -14,7 +14,6 @@ class Login extends Component {
           <SmallCard error={this.props.error} title="login">
               <Row><Input onChange={this.props.onChange} placeholder="Email"/></Row>
               <Row><Input onChange={this.props.onPassChange} placeholder="Password" secure="true"/></Row>
-              <Row><a className={"link forgot"}>Forgot password?</a></Row>
               <Button icon={'sign-in-alt' } onClick={this.props.onClick.bind(this)}>
                 Login
               </Button>

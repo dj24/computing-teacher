@@ -13,6 +13,8 @@ import Navbar from './components/Navbar'
 import Drawer from './components/Drawer'
 import Admin from './screens/Admin'
 import Register from './screens/Register'
+import Users from './screens/Users'
+import AddTest from './screens/AddTest'
 import {notification,host} from './util'
 
 
@@ -48,13 +50,31 @@ class App extends Component {
     if(token){
       axios.post(host + '/verifyToken',{token})
       .then((response) => {
-        //token verified
-        this.open();
-        //notification("Token Verified");
+        if(response.data){
+          let queryString = host + '/query?type=getUser&criteria={"_id":"' + response.data.id +'"}';
+          axios.get(queryString)
+          .then((user) => {
+            if(user.data){
+              this.setState({user:user.data.username});
+            }
+            console.log(this.state.user);
+          })
+          .then(()=>{
+            this.setState({loggedIn:true});
+            let queryString = host + '/query?type=isAdmin&criteria={"username":"' + this.state.user +'"}'
+            axios.get(queryString)
+            .then((admin) => {
+              if(admin.data){
+                this.setState({admin:true});
+              }
+            })
+          });
+        }
       })
       .catch((error) => {
         //token invalid
         //(error,true);
+        console.log(error);
       })
     }
   }
@@ -95,14 +115,28 @@ class App extends Component {
 
   router = () => {
     if(this.state.loggedIn){
-      return (<div className='col main'>
-        <Navbar/>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/tests/:id" component={Tests} />
-        <Route path="/test/:id" component={TestScreen} />
-        <Route path="/sections" component={Sections} />
-        <Route path="/admin" component={Admin} />
-      </div>)
+      if(this.state.admin){
+        return (<div className='col main'>
+          <Navbar/>
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/tests/:id" component={Tests} />
+          <Route path="/test/:id" component={TestScreen} />
+          <Route path="/sections" component={Sections} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/users" component={Users} />
+          <Route path="/addtest" component={AddTest} />
+        </div>)
+      }
+      else{
+        return (<div className='col main'>
+          <Navbar/>
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/tests/:id" component={Tests} />
+          <Route path="/test/:id" component={TestScreen} />
+          <Route path="/sections" component={Sections} />
+        </div>)
+      }
+
     }
 
     else{

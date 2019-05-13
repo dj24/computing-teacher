@@ -13,21 +13,28 @@ class Activity extends Component {
     };
   }
 
-  componentDidMount(){
-    getId().then((id) =>{
-      axios.get(host + '/query?type=getTestLogs&criteria={"userID":"' + id + '"}')
-      .then((response) => {
-        this.setState({testLogs : response.data,loading:false});
-        console.log(this.state.testLogs);
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+  getLogs(){
+    let id = this.props.id;
+    console.log(id);
+    axios.get(host + '/query?type=getTestLogs&criteria={"userID":"' + id + '"}')
+    .then((response) => {
+      this.setState({testLogs : response.data,loading:false});
+    })
+    .catch((error) => {
+      console.log(error)
     });
   }
 
-  render() {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.id !== this.props.id) {
+      this.getLogs();
+    }
+  }
 
+  render() {
+    if(this.state.testLogs.length === 0){
+      this.getLogs();
+    }
 
     if(this.state.loading){
       return <Loader/>
@@ -42,7 +49,7 @@ class Activity extends Component {
               return (
                 <li className="animated fadeIn faster" style={style} key={i}>
                   <div>
-                  Took test: {log.title} <br/>
+                  Scored {log.result}% in {log.title} <br/>
                   <span className="faint"><i className="material-icons  small">access_time</i> {log.diff === 0 ? "Today" : log.diff + " days ago"}</span>
                   </div>
                   <i className="material-icons">library_books</i>

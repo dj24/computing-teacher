@@ -57,11 +57,7 @@ class Navbar extends Component {
           <li className="nav-item menu-icon">
               <a onClick={showMenu} className="nav-link" ><i className="material-icons">menu</i></a>
           </li>
-            <li className="nav-item search-container">
-                <i className="material-icons nav-icon-static">search</i>
-                <input placeholder="SEARCH" className="search"></input>
-            </li>
-            <li className="nav-item flex">
+            <li className="nav-item flex justify-content-end w100">
                 <Link className="nav-link account-circle animated fadeIn" to={'/account'}>
                   {initials}
                 </Link>

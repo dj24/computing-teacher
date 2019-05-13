@@ -5,7 +5,7 @@ class Loader extends Component {
 
   render() {
     return (
-      <div className="card-loader">
+      <div className="card-loader animated fadeIn">
         <PulseLoader/>
       </div>
     );

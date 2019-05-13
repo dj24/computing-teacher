@@ -4,6 +4,7 @@ import {SmallCard} from '../components/Card'
 import Heading from '../components/Heading'
 import ProgressBar from '../components/ProgressBar';
 import Row from '../components/Row'
+import Loader from '../components/Loader'
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import {host} from '../util'
@@ -58,7 +59,8 @@ class Tests extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tests:[]
+      tests:[],
+      loading:true
     };
   }
   componentDidMount(){
@@ -73,7 +75,7 @@ class Tests extends Component {
           .then(res => {
             const tests = res.data;
             console.log(tests);
-            this.setState({ tests });
+            this.setState({ tests ,loading:false});
           })
         }
         else{
@@ -105,20 +107,22 @@ class Tests extends Component {
     ))
   }
 
-/*
+    if(this.state.loading){
+      return <Loader/>
+    }
+    else{
+      return (
+        <FadingScreen>
 
-    let test = <Test test={this.state.activeTest} onClose={this.toggleTest} show={this.state.showTest}/>;
-*/
-    return (
-      <FadingScreen>
+        <Heading animated='true'>{this.state.section} Tests</Heading>
+        <Row>
+          {tests }
+        </Row>
 
-      <Heading animated='true'>{this.state.section} Tests</Heading>
-      <Row>
-        {tests }
-      </Row>
+        </FadingScreen>
+      );
+}
 
-      </FadingScreen>
-    );
   }
 }
 

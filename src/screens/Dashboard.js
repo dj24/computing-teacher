@@ -22,6 +22,7 @@ class Dashboard extends Component {
 
   componentDidMount(){
     getId().then((id) =>{
+      this.setState({id});
       axios.get(host + '/query?type=getUser&criteria={"_id":"' + id +'"}')
       .then((response) => {
         this.setState({user :
@@ -57,22 +58,22 @@ class Dashboard extends Component {
     return (
       <FadingScreen>
         <Row>
-          <Heading>{this.state.user.firstname ? greeting + this.state.user.firstname : ''} </Heading>
+          <Heading animated='true'>{this.state.user.firstname ? greeting + this.state.user.firstname : ''} </Heading>
         </Row>
         <Row>
         <MediumCard title="Next Level">
-          <LevelProgress/>
+          <LevelProgress id={this.state.id}/>
         </MediumCard>
           <MediumCard title="Your Progress">
-            <XpGraph/>
+            <XpGraph id={this.state.id}/>
           </MediumCard>
 
 
-          <SmallCard title="Your Activity">
-            <Activity/>
+          <SmallCard noPadding={true} title="Your Activity">
+            <Activity id={this.state.id}/>
           </SmallCard>
-          <MediumLargeCard title="Your Progress">
-            <Badges/>
+          <MediumLargeCard noPadding={true} title="Your Badges">
+            <Badges id={this.state.id}/>
           </MediumLargeCard>
 
         </Row>

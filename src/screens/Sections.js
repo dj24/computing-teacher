@@ -7,20 +7,22 @@ import ProgressBar from '../components/ProgressBar'
 import axios from 'axios';
 import {host,getId} from '../util';
 import { Link } from "react-router-dom";
+import Loader from '../components/Loader';
 //import axios from 'axios';
 
 class Sections extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sections : []
+      sections : [],
+      loading: true
     };
   }
   componentDidMount(){
     getId().then((id) =>{
       axios.get(host + '/query?type=getSections')
       .then((response) => {
-        this.setState({sections:response.data});
+        this.setState({sections:response.data,loading:false});
       })
       .catch((error) => {
         console.log(error)
@@ -47,7 +49,6 @@ class Sections extends Component {
     let sections;
 
     if (this.state.sections.length > 0) {
-      console.log(this.state.sections);
       sections = this.state.sections.map((section,i) =>
 
         <ImageCard className={'learn-card'} src={'https://images.pexels.com/photos/825258/pexels-photo-825258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'}>
@@ -63,15 +64,20 @@ class Sections extends Component {
     }
 
 
+    if(this.state.loading){
+      return <Loader/>
+    }
+    else{
+      return (
+        <FadingScreen>
+        <Row style={screenStyle}>
+          <div className="col-12"><Heading animated='true'>Sections</Heading></div>
+          {sections}
+        </Row>
+        </FadingScreen>
+      );
+    }
 
-    return (
-      <FadingScreen>
-      <Row style={screenStyle}>
-        <div className="col-12"><Heading animated='true'>Sections</Heading></div>
-        {sections}
-      </Row>
-      </FadingScreen>
-    );
   }
 }
 

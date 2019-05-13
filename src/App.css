@@ -1,9 +1,13 @@
+@charset "UTF-8";
 /*colours */
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,600");
 /*
 @import url('https://fonts.googleapis.com/css?family=Quicksand:300,500');
 $font : 'Quicksand', sans-serif;
 */
+body {
+  color: rgba(0, 0, 0, 0.6); }
+
 a, a:hover {
   color: inherit;
   transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.4s; }
@@ -99,10 +103,7 @@ hr {
   .card .card-header {
     background: 0;
     text-transform: uppercase;
-    font-weight: 600;
-    color: #7DE522;
-    padding: 10px 0;
-    margin: 20px; }
+    font-weight: 600; }
   .card .card-img-top {
     filter: grayscale(50%);
     transition: all 5s linear;
@@ -152,7 +153,7 @@ hr {
     border-radius: 0;
     background: 0;
     border: 0;
-    color: #A4A9B2;
+    color: rgba(0, 0, 0, 0.6);
     transition: background-color cubic-bezier(0.19, 1, 0.22, 1) 0.4s; }
     .drawer .list-group-item > div {
       height: 60px;
@@ -209,6 +210,28 @@ hr {
     float: right; }
   .notifications {
     display: none; } }
+
+.next-level h2 {
+  padding: 0 !important; }
+
+.medal-container {
+  max-height: 315px;
+  overflow-y: scroll; }
+
+.medal {
+  text-align: center;
+  padding: 20px;
+  width: 100%; }
+  .medal p, .medal h5 {
+    padding: 0 !important; }
+  .medal h5 {
+    font-weight: bold; }
+  .medal img {
+    margin-bottom: 10px; }
+  .medal.inactive {
+    opacity: 0.25;
+    transform: scale(0.9);
+    filter: grayscale(50%); }
 
 nav {
   z-index: 2;
@@ -351,6 +374,9 @@ button {
 .flex {
   display: flex; }
 
+.w100 {
+  width: 100%; }
+
 .link {
   cursor: pointer; }
   .link:hover {
@@ -393,8 +419,9 @@ b {
   border: 1px solid rgba(0, 0, 0, 0.25); }
 
 .activity {
-  height: 300px;
-  max-height: 300px;
+  margin-bottom: 0;
+  height: 315px;
+  max-height: 315px;
   overflow-y: scroll;
   list-style: none;
   padding: 0; }
@@ -403,7 +430,7 @@ b {
     justify-content: space-between;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 4px;
-    margin: 10px 10px 10px 0;
+    margin: 10px;
     padding: 10px; }
     .activity li i {
       font-size: 40px;
@@ -414,8 +441,6 @@ b {
     .activity li .faint {
       opacity: 0.5;
       font-style: italic; }
-    .activity li:first-child {
-      margin-top: 0; }
 
 .card-loader {
   display: flex;
@@ -427,3 +452,13 @@ b {
   display: flex;
   align-items: center;
   justify-content: center; }
+  @media (max-width: 600px) {
+    .next-level {
+      text-align: center; } }
+
+.table th {
+  cursor: pointer; }
+  .table th[aria-sort="ascending"]:before {
+    content: '▴'; }
+  .table th[aria-sort="descending"]:before {
+    content: '▾'; }

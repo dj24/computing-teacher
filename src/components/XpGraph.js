@@ -15,20 +15,27 @@ class XpGraph extends Component {
     };
   }
 
-  componentDidMount(){
-      getId().then((id) =>{
-        axios.get(host + '/query?type=getXpLogs&criteria={"userID":"' + id + '"}')
-        .then((response) => {
-          this.setState({xpLogs : response.data,loading:false});
-          console.log(this.state.xpLogs);
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      });
+  getLogs(){
+    let id = this.props.id;
+    axios.get(host + '/query?type=getXpLogs&criteria={"userID":"' + id + '"}')
+    .then((response) => {
+      this.setState({xpLogs : response.data,loading:false});
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.id !== this.props.id) {
+      this.getLogs();
+    }
   }
 
   render() {
+    if(this.state.xpLogs.length === 0){
+      this.getLogs();
+    }
 
     let pie_data = {
       datasets: [{

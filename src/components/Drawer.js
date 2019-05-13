@@ -9,7 +9,7 @@ class Drawer extends Component {
 
 
   render() {
-
+    //console.log(this.props.admin);
     let drawerItems;
     if(this.props.admin){
       drawerItems =
@@ -22,7 +22,7 @@ class Drawer extends Component {
         <DrawerItem icon="dashboard" label="Dashboard" link="/"/>
         <DrawerItem icon="edit" label="Tests" link="/sections"/>
         <DrawerItem icon="person" label="Account" link="/account"/>
-        <DrawerItem icon="playlist_add" label="Add Content" link="/admin"/>
+        <DrawerItem icon="playlist_add" label="Admin" link="/admin"/>
         <DrawerItem icon="help" label="Help" link="/help"/>
         <DrawerItem icon="settings" label="Settings" link="/settings"/>
       </ul>

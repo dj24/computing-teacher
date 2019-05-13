@@ -24,8 +24,9 @@ class LevelProgress extends Component {
     };
   }
 
-  componentDidMount(){
-    getId().then((id) =>{
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.id !== this.props.id) {
+      let id = this.props.id;
       axios.get(host + '/query?type=getXp&criteria={"userID":"' + id + '"}')
       .then((response) => {
         let xp;
@@ -41,8 +42,7 @@ class LevelProgress extends Component {
       .catch((error) => {
         console.log(error)
       })
-    });
-
+    }
   }
 
   render() {

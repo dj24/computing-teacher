@@ -12,16 +12,29 @@ class Badges extends Component {
     this.state = {
       badges: [],
       achievedBadges : [],
-      loading:true
     };
   }
 
   componentDidMount(){
+    getId().then((id) =>{
+      axios.get(host + '/query?type=getAchievements&criteria={"userID":"' + id + '"}')
+      .then((response) => {
+        if(response){
+          this.setState({achievedBadges : response.data});
+          console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    });
+
       getId().then((id) =>{
         axios.get(host + '/query?type=getAchievements')
         .then((response) => {
-          this.setState({badges : response.data,loading:false});
-          console.log(this.state.badges);
+          if(response){
+            this.setState({badges : response.data});
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -30,23 +43,37 @@ class Badges extends Component {
   }
 
   render() {
+    let indexes = [];
+    for(let badge of this.state.badges){
+      let achieved = false;
+      for (let a of this.state.achievedBadges){
+        if(badge._id === a._id){
+          indexes.push(this.state.achievedBadges.indexOf(a));
+        }
+      }
+    }
 
-      if(this.state.loading){
+      if(this.state.badges.length === 0){
         return <Loader/>
       }
       else{
         return (
-          <Row className={'inner'}>
-              {
-                this.state.badges.map((badge,i)=>{
-                  return (
-                    <div class="col-6 col-xl-3 col-lg-4 medal" key={i}>
-                      <img src={require("../img/badges/" + badge.img)}/>
-                    </div>
-                  )
-                })
-              }
-          </Row>
+          <div class="medal-container">
+            <Row>
+                {
+                  this.state.badges.map((badge,i)=>{
+                      return (
+                        <div className={"col-6 col-xl-3 col-lg-4 medal " + (indexes.includes(i) ? "active" : "inactive")} key={i}>
+                          <img alt={"badge - " + badge.name} src={require("../img/badges/" + badge.img)}/>
+                          <h5>{badge.name}</h5>
+                          {indexes.includes(i) ? <p>Achieved on {this.state.achievedBadges[i].date}</p> : ""}
+                        </div>
+                      )
+
+                    })
+                }
+            </Row>
+          </div>
         );
       }
 

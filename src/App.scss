@@ -21,6 +21,10 @@ $font : 'Montserrat', sans-serif;
 @import url('https://fonts.googleapis.com/css?family=Quicksand:300,500');
 $font : 'Quicksand', sans-serif;
 */
+body{
+  color:rgba(0,0,0,0.6);
+}
+
 a, a:hover{
   color: inherit;
   transition: $anim;
@@ -144,9 +148,6 @@ hr{
     background:0;
     text-transform: uppercase;
     font-weight: 600;
-    color:$primary;
-    padding:$margin/2 0;
-    margin: $margin;
   }
   .card-img-top{
     filter: grayscale(50%);
@@ -206,7 +207,7 @@ hr{
     border-radius: 0;
     background: 0;
     border: 0;
-    color:$light;
+    color:rgba(0,0,0,0.6);
     transition: background-color cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
     >div{
       height: 60px;
@@ -277,6 +278,8 @@ hr{
     margin-left:0;
   }
 
+
+
   .module{
     margin-top: $nav-height;
     padding:0;
@@ -293,6 +296,35 @@ hr{
 
 @media only screen and (max-width: 600px) {
 
+}
+
+.next-level h2{
+  padding:0!important;
+}
+
+.medal-container{
+  max-height: 315px;
+  overflow-y: scroll;
+}
+
+.medal{
+  text-align:center;
+  padding:20px;
+  p,h5{
+    padding:0 !important;
+  }
+  h5{
+    font-weight:bold;
+  }
+  img{
+    margin-bottom:10px;
+  }
+  width:100%;
+  &.inactive{
+    opacity:0.25;
+    transform: scale(0.9);
+    filter:grayscale(50%);
+  }
 }
 
 nav{
@@ -458,6 +490,9 @@ button{
 .flex{
   display: flex;
 }
+.w100{
+  width:100%;
+}
 
 .link{
   cursor: pointer;
@@ -515,8 +550,9 @@ b{
 }
 
 .activity{
-  height:300px;
-  max-height: 300px;
+  margin-bottom:0;
+  height:315px;
+  max-height: 315px;
   overflow-y: scroll;
   list-style: none;
   padding: 0;
@@ -537,11 +573,8 @@ b{
       font-style: italic;
     }
     border-radius: 4px;
-    margin:10px 10px 10px 0;
+    margin:10px;
     padding:10px;
-    &:first-child{
-      margin-top:0;
-    }
   }
 }
 
@@ -556,4 +589,19 @@ b{
   display: flex;
     align-items: center;
     justify-content: center;
+    @media(max-width:600px){
+      text-align:center;
+    }
+}
+
+.table{
+  th{
+    cursor:pointer;
+    &[aria-sort="ascending"]:before{
+      content: '▴';
+    }
+    &[aria-sort="descending"]:before{
+      content: '▾';
+    }
+  }
 }
