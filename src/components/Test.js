@@ -6,6 +6,21 @@ import {Link,Redirect} from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import {host,getId} from '../util';
+var stringSimilarity = require('string-similarity');
+var misspellings = require("misspellings");
+
+var dict = misspellings.dict();
+
+//function used to give a small margin for error, and correct single word misspellings
+function rateAnswer(correctAns,userAns){
+  if(dict[userAns]){
+    console.log("mispelling found");
+    //if common mispelling then correct
+    userAns = dict[userAns];
+  }
+  let rating = stringSimilarity.compareTwoStrings(userAns.toLowerCase(),correctAns.toLowerCase());
+  return rating > 0.94 ? true : false;
+}
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -102,12 +117,13 @@ class Test extends Component {
 
   selectAnswer = (answer) =>{
     let answers = this.state.answers;
-    answers[this.state.currentQuestion] = answers;
+    answers[this.state.currentQuestion] = answer;
     this.setState({answers});
   }
 
   inputChange(e){
     let answers = this.state.answers;
+    console.log(answers);
     answers[this.state.currentQuestion] = e.target.value;
     this.setState({answers});
   }
@@ -117,7 +133,12 @@ class Test extends Component {
     let answers = this.state.answers;
     let questions = this.props.test.questions;
     for(let i = 0; i < answers.length; i++){
+      console.log(questions[i]);
+
       if(questions[i].correct_answer === answers[i]){
+        accuracy++;
+      }
+      else if(questions[i].type === "margin" && rateAnswer(questions[i].correct_answer,answers[i])){
         accuracy++;
       }
     }
@@ -171,6 +192,7 @@ class Test extends Component {
 
 
   render() {
+    console.log(this.state.answers);
     const cardStyle = {
       width: '100%',
       maxWidth: '800px',
@@ -214,14 +236,14 @@ class Test extends Component {
     let total = this.state.totalQuestions;
     let nextBtn;
     if(current === total){
-      nextBtn = <button onClick={this.finishTest}>Finish</button>
+      nextBtn = <button className="test-button" onClick={this.finishTest}>Finish</button>
     }
     else{
-      nextBtn = <button onClick={this.nextQuestion}>Next</button>
+      nextBtn = <button className="test-button" onClick={this.nextQuestion}>Next</button>
     }
 
     let image;
-    if(imageSrc){
+    if(!imageSrc.includes('addtest')){
       image = <img style={{
         maxWidth:"100%",
         display:"block",
@@ -264,13 +286,9 @@ class Test extends Component {
                 {this.props.test.questions[this.state.currentQuestion].type === 'multiple' ? choices : input}
               <Row style={{
                 display: 'flex',
-                justifyContent: 'space-around',
+                justifyContent: 'flex-end',
               }}>
-                <button onClick={this.prevQuestion}>Prev</button>
                 {nextBtn}
-                <Link to="/sections">
-                  <i className="material-icons">close</i>
-                </Link>
               </Row>
 
 

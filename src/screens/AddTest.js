@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import FadingScreen from '../components/FadingScreen'
 import {LargeCard} from '../components/Card'
@@ -116,6 +117,7 @@ class Admin extends Component {
         sections:[],
       };
       this.addQuestion = this.addQuestion.bind(this);
+      this.removeQuestion = this.removeQuestion.bind(this);
   }
 
   sectionHelp(){
@@ -136,6 +138,12 @@ class Admin extends Component {
     this.setState({
       questions: [2, ...this.state.questions]
     })
+  }
+
+  removeQuestion(){
+    let questions = this.state.questions;
+    questions.pop();
+    this.setState({questions});
   }
 
 
@@ -178,13 +186,20 @@ class Admin extends Component {
       questions,
     }
 
-    axios.post(host + '/query?type=addTest', test)
-    .then(function (response) {
-      Swal.fire('Test Added!', '"' + title +'" added to database.', 'success');
-    })
-    .catch(function (error) {
-        Swal.fire('Error', error.data, 'error');
-    });
+    if(questions.length !== 0 && document.getElementById('test_title').value != ""){
+      axios.post(host + '/query?type=addTest', test)
+      .then(function (response) {
+        Swal.fire('Test Added!', '"' + title +'" added to database.', 'success');
+      })
+      .catch(function (error) {
+          Swal.fire('Error', error.data, 'error');
+      });
+    }
+    else{
+        Swal.fire('Error', "Please enter all fields", 'error');
+    }
+
+
   }
 
 
@@ -228,6 +243,7 @@ class Admin extends Component {
             </div>
 
             <Button onClick={this.addQuestion}>Add Question</Button>
+            <Button onClick={this.removeQuestion}>Remove Question</Button>
             <Button onClick={this.addTest}>Add Test</Button>
       </FadingScreen>
     );

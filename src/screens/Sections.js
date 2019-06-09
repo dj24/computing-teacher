@@ -8,14 +8,17 @@ import axios from 'axios';
 import {host,getId} from '../util';
 import { Link } from "react-router-dom";
 import Loader from '../components/Loader';
-//import axios from 'axios';
+import ViewPDF from '../components/ViewPDF';
+import 'lightbox-react/style.css';
+import Lightbox from 'lightbox-react';
 
 class Sections extends Component {
   constructor(props) {
     super(props);
     this.state = {
       sections : [],
-      loading: true
+      loading: true,
+      isOpen: false
     };
   }
   componentDidMount(){
@@ -50,9 +53,10 @@ class Sections extends Component {
 
     if (this.state.sections.length > 0) {
       sections = this.state.sections.map((section,i) =>
-
-        <ImageCard className={'learn-card'} src={'https://images.pexels.com/photos/825258/pexels-photo-825258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'}>
+        <ImageCard key={i} className={'learn-card'} src={section.img}>
           <Link to={'tests/' + section._id}><h3>{section.name}</h3></Link>
+          {section.pdf ? <button className={"ml-3"} type="button" onClick={() => this.setState({isOpen: true, activePdf : section.pdf})}>Learning Material</button> : <p></p>}
+
           <div style={{display:'flex',alignItems:'center'}} className={'bottom'}>
             <ProgressBar width={50}/>
             <h5 style={{padding:0}}>50%</h5>
@@ -64,8 +68,21 @@ class Sections extends Component {
     }
 
 
+
     if(this.state.loading){
       return <Loader/>
+    }
+    else if(this.state.isOpen){
+      return (
+        <div>
+        <button style={{padding:10,margin:10}} type="button" onClick={() => this.setState({isOpen:false})}>
+          Close PDF
+        </button>
+        <ViewPDF
+          src={this.state.activePdf}
+        />
+        </div>
+      )
     }
     else{
       return (

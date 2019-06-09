@@ -9,14 +9,17 @@ import Sections from './screens/Sections'
 import Tests from './screens/Tests'
 import TestScreen from './screens/TestScreen'
 import Dashboard from './screens/Dashboard'
+import AddSection from './screens/AddSection'
 import Navbar from './components/Navbar'
 import Drawer from './components/Drawer'
 import Admin from './screens/Admin'
 import Register from './screens/Register'
 import Users from './screens/Users'
 import AddTest from './screens/AddTest'
+import ManageSections from './screens/ManageSections'
 import {notification,host} from './util'
-
+import FAQ from './screens/FAQ';
+import Account from './screens/Account';
 
 class App extends Component {
   constructor(props) {
@@ -124,7 +127,11 @@ class App extends Component {
           <Route path="/sections" component={Sections} />
           <Route path="/admin" component={Admin} />
           <Route path="/users" component={Users} />
+          <Route path="/managesections" component={ManageSections} />
+          <Route path="/addsection" component={AddSection} />
           <Route path="/addtest" component={AddTest} />
+          <Route path="/help" component={FAQ} />
+          <Route path="/account" component={Account} />
         </div>)
       }
       else{
@@ -134,6 +141,8 @@ class App extends Component {
           <Route path="/tests/:id" component={Tests} />
           <Route path="/test/:id" component={TestScreen} />
           <Route path="/sections" component={Sections} />
+          <Route path="/help" component={FAQ} />
+          <Route path="/account" component={Account} />
         </div>)
       }
 

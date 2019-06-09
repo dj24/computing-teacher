@@ -24,7 +24,6 @@ class Drawer extends Component {
         <DrawerItem icon="person" label="Account" link="/account"/>
         <DrawerItem icon="playlist_add" label="Admin" link="/admin"/>
         <DrawerItem icon="help" label="Help" link="/help"/>
-        <DrawerItem icon="settings" label="Settings" link="/settings"/>
       </ul>
 
     }
@@ -40,7 +39,6 @@ class Drawer extends Component {
         <DrawerItem icon="edit" label="Tests" link="/sections"/>
         <DrawerItem icon="person" label="Account" link="/account"/>
         <DrawerItem icon="help" label="Help" link="/help"/>
-        <DrawerItem icon="settings" label="Settings" link="/settings"/>
       </ul>
     }
 

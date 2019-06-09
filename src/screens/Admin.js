@@ -28,7 +28,7 @@ class Home extends Component {
         <Heading animated='true'>Admin</Heading>
         <AdminButton link="/users" text={"Users"}/>
         <AdminButton link="/addtest" text={"Add Test"}/>
-        <AdminButton link="/users" text={"Manage Sections"}/>
+        <AdminButton link="/managesections" text={"Manage Sections"}/>
       </FadingScreen>
     );
   }

@@ -27,27 +27,28 @@ class Test extends Component {
       .then((response) => {
         //token verified
         userId = response.data.id;
+        axios.get(host + '/getHighestScore?testId=' + this.props.id +'&userId=' + userId)
+        .then(score => {
+          if(score.data){
+            console.log(score);
+            this.setState({score:score.data});
+          }
+        });
       })
     }
     //notification("Tests Screen");
-    axios.get(host + '/getHighestScore?testId=' + this.state.id +'&userId=' + userId)
-    .then(score => {
-      if(score.data){
-        //console.log(score);
-        this.setState({score:score.data});
-      }
-    });
+
   }
 
   render(){
     return(
       <SmallCard id={this.props.id} delay={0} title={this.props.title}>
-        <p>Test</p>
-        <Link className={'btn'} to={'/test/' + this.props.id}>Start</Link>
+        <h5>Your Highest Score</h5>
         <div style={{display:'flex',alignItems:'center'}} className={'bottom'}>
           <ProgressBar width={this.state.score}/>
           <h5 className="animated fadeIn" style={{padding:0}}>{Math.round(this.state.score)}%</h5>
         </div>
+          <Link className={'btn'} to={'/test/' + this.props.id}>Begin Test</Link>
       </SmallCard>
     )
 

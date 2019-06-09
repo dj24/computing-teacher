@@ -54,6 +54,12 @@ a, a:hover{
   }
 }
 
+.test-button{
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  margin-right:20px;
+}
+
 body{
   margin: 0;
   background: $bg;
@@ -434,7 +440,8 @@ nav{
   border-radius: 2px;
 }
 .btn:hover{
-  background:$accent;
+  color:#fff;
+  opacity:0.5;
 }
 
 .blur{
